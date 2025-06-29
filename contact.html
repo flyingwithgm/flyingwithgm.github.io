@@ -1,58 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact | GM73</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | GM73</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body class="dark-mode">
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">
-      <img src="images/gm73-logo.png" alt="GM73 Logo">
-      <h1>GM73</h1>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="aviation.html">Aviation</a></li>
-      <li><a href="ai.html">AI</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
-    </ul>
-    <div class="burger">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </nav>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="images/gm73-logo.png" alt="GM73 Logo" class="logo">
+                <span class="brand-name">GM73</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aviation.html">Aviation</a></li>
+                <li><a href="ai.html">AI</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
 
-  <!-- Header -->
-  <header class="page-header">
-    <h1>Contact George</h1>
-    <p>Let’s build the future together — on the ground or in the skies.</p>
-  </header>
+    <section class="page-hero contact-hero">
+        <div class="hero-content">
+            <h1>CONTACT</h1>
+            <h2>Let's Connect</h2>
+            <p>Opportunities, collaborations, or just to say hello</p>
+        </div>
+    </section>
 
-  <!-- Contact Form Section -->
-  <section class="contact-form">
-    <form>
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea placeholder="Your Message" rows="5" required></textarea>
-      <button type="submit">Send Message (Mockup Only)</button>
-    </form>
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-form">
+                <h2>Send Me a Message</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Send Message</button>
+                </form>
+                <div id="formSuccess" class="form-success">
+                    <p>Message sent successfully! I'll get back to you soon.</p>
+                </div>
+            </div>
+            <div class="contact-info">
+                <h2>Direct Contacts</h2>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Email</h3>
+                        <a href="mailto:georgenuyekpe@gmail.com">georgenuyekpe@gmail.com</a>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>GitHub</h3>
+                        <a href="https://github.com/flyingwithgm" target="_blank">github.com/flyingwithgm</a>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Location</h3>
+                        <p>Takoradi, Ghana</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Socials & Info -->
-    <div class="socials">
-      <p><strong>Email:</strong> <a href="mailto:georgenuyekpe@gmail.com">georgenuyekpe@gmail.com</a></p>
-      <p><strong>GitHub:</strong> <a href="https://github.com/flyingwithgm" target="_blank">@flyingwithgm</a></p>
-    </div>
+    <section class="inspiration-section">
+        <div class="quote-container">
+            <blockquote>
+                "The air up there in the clouds is very pure and fine, bracing and delicious. And why shouldn't it be? — it is the same the angels breathe."
+            </blockquote>
+            <p>- Mark Twain</p>
+            <div class="signature">
+                <p>George Nuyekpe</p>
+                <p>GM73 | The Flying Engineer</p>
+            </div>
+        </div>
+    </section>
 
-    <!-- Quote -->
-    <blockquote class="inspiration">
-      “We rise by lifting others.” — <strong>GM73</strong>
-    </blockquote>
-  </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="images/gm73-logo.png" alt="GM73 Logo" class="footer-logo">
+                <h3>GM73 | The Flying Engineer</h3>
+                <p>Bridging Aviation & Technology</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aviation.html">Aviation</a></li>
+                    <li><a href="ai.html">AI</a></li>
+                </ul>
+                <ul>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="https://github.com/flyingwithgm" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 George Nuyekpe. All rights reserved.</p>
+            <p>From Ghana to the World</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
