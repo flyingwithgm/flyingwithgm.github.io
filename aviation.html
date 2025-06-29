@@ -1,80 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aviation | GM73</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviation | GM73</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body class="dark-mode">
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">
-      <img src="images/gm73-logo.png" alt="GM73 Logo">
-      <h1>GM73</h1>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="aviation.html" class="active">Aviation</a></li>
-      <li><a href="ai.html">AI</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <div class="burger">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </nav>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="images/gm73-logo.png" alt="GM73 Logo" class="logo">
+                <span class="brand-name">GM73</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aviation.html" class="active">Aviation</a></li>
+                <li><a href="ai.html">AI</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
 
-  <!-- Header -->
-  <header class="page-header">
-    <h1>Aviation & Flight Training</h1>
-    <p>George’s journey to the skies begins here.</p>
-  </header>
-
-  <!-- Aviation Content -->
-  <main class="aviation-content">
-    <section>
-      <h2>What is Aviation?</h2>
-      <p>Aviation is the science and practice of flight. It includes everything from piloting small aircraft to managing complex airline systems. It’s where physics, engineering, and passion meet the skies.</p>
+    <section class="page-hero aviation-hero">
+        <div class="hero-content">
+            <h1>AVIATION</h1>
+            <h2>The Sky Is Not The Limit</h2>
+            <p>Understanding the science, art, and future of flight</p>
+        </div>
     </section>
 
-    <section>
-      <h2>Types of Licenses</h2>
-      <ul>
-        <li><strong>PPL</strong>: Private Pilot License — for non-commercial flying</li>
-        <li><strong>CPL</strong>: Commercial Pilot License — to earn as a pilot</li>
-        <li><strong>ATPL</strong>: Airline Transport Pilot License — top-tier license to fly for airlines</li>
-      </ul>
+    <section class="aviation-intro">
+        <div class="section-content">
+            <h2>What is Aviation?</h2>
+            <p>Aviation is the science and practice of flight through the air. It encompasses everything from the design and operation of aircraft to the infrastructure that supports air travel. For me, aviation represents the perfect marriage of human ingenuity and technological progress.</p>
+            
+            <div class="flight-path-animation">
+                <div class="airplane-icon">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <div class="path"></div>
+                <div class="waypoints">
+                    <div class="waypoint" style="left: 10%;">Takeoff</div>
+                    <div class="waypoint" style="left: 30%;">Climb</div>
+                    <div class="waypoint" style="left: 50%;">Cruise</div>
+                    <div class="waypoint" style="left: 70%;">Descent</div>
+                    <div class="waypoint" style="left: 90%;">Landing</div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section>
-      <h2>George’s Flight Plan</h2>
-      <p>After completing his Computer Science degree focused on AI, George aims to enroll in an accredited pilot training school in Canada or Ghana, earn his PPL, then CPL, and eventually become ATPL-certified.</p>
+    <section class="licenses-section">
+        <h2>Pilot License Path</h2>
+        <div class="licenses-grid">
+            <div class="license-card">
+                <h3>PPL</h3>
+                <h4>Private Pilot License</h4>
+                <ul>
+                    <li>Fly single-engine aircraft</li>
+                    <li>Cannot be paid to fly</li>
+                    <li>~50-70 flight hours</li>
+                    <li>Basic navigation & meteorology</li>
+                </ul>
+            </div>
+            <div class="license-card">
+                <h3>CPL</h3>
+                <h4>Commercial Pilot License</h4>
+                <ul>
+                    <li>Fly for compensation</li>
+                    <li>~150-200 flight hours</li>
+                    <li>Advanced flight operations</li>
+                    <li>Instrument rating required</li>
+                </ul>
+            </div>
+            <div class="license-card">
+                <h3>ATPL</h3>
+                <h4>Air Transport Pilot License</h4>
+                <ul>
+                    <li>Command aircraft >5700kg</li>
+                    <li>~1500 flight hours</li>
+                    <li>Airline transport operations</li>
+                    <li>Highest civilian certification</li>
+                </ul>
+            </div>
+        </div>
+        <div class="license-path">
+            <p>My planned path: Complete Computer Science degree → Save for flight training → Earn PPL → CPL → ATPL while working in aviation-tech field</p>
+        </div>
     </section>
 
-    <section>
-      <h2>Tools Pilots Use</h2>
-      <ul>
-        <li>Flight Management Systems (FMS)</li>
-        <li>Glass Cockpits & HUDs</li>
-        <li>Flight Planning Software</li>
-        <li>Autopilot & Avionics Systems</li>
-      </ul>
+    <section class="tools-section">
+        <h2>Modern Pilot Tools</h2>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-satellite-dish"></i>
+                </div>
+                <h3>Avionics Systems</h3>
+                <p>Glass cockpits with integrated flight management systems (FMS) and GPS navigation</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <h3>Data Link Communications</h3>
+                <p>ACARS for text-based communication with ATC and airlines</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-cloud-sun-rain"></i>
+                </div>
+                <h3>Weather Radar</h3>
+                <p>Onboard systems to detect and avoid severe weather</p>
+            </div>
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Autopilot Systems</h3>
+                <p>Advanced automation for cruise, approach, and landing phases</p>
+            </div>
+        </div>
     </section>
 
-    <section>
-      <h2>Why Africa Needs Tech-Driven Pilots</h2>
-      <p>Africa’s aviation sector is growing fast. But we lack pilots who understand both the cockpit and the code. George’s mission is to fill that gap — building tools, simulations, and systems for safe, smart African skies.</p>
+    <section class="africa-section">
+        <h2>Why Africa Needs Tech-Savvy Pilots</h2>
+        <div class="africa-content">
+            <div class="africa-text">
+                <p>Africa's aviation industry is projected to grow by 5% annually, faster than the global average. Yet the continent faces:</p>
+                <ul>
+                    <li>Shortage of trained aviation professionals</li>
+                    <li>Limited adoption of modern aviation technologies</li>
+                    <li>Insufficient infrastructure for growing demand</li>
+                    <li>Need for localized solutions to unique challenges</li>
+                </ul>
+                <p>As a Ghanaian with both technical and aviation training, I aim to bridge this gap by:</p>
+                <ul>
+                    <li>Developing cost-effective training tools</li>
+                    <li>Creating systems tailored to African aviation needs</li>
+                    <li>Mentoring the next generation of African aviators</li>
+                    <li>Advocating for technology adoption in regional aviation</li>
+                </ul>
+            </div>
+            <div class="africa-map">
+                <!-- This would be an SVG or image of Africa with flight paths -->
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <p>African Aviation Growth Map</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="flight-path-animation">
-      <h2>Visualize the Journey</h2>
-      <p>✈️ Follow George’s flight path — from Ghana to global airspace.</p>
-      <!-- Future: Add animated SVG flight path with motion.js -->
+    <section class="cta-section">
+        <h2>Ready to Explore the Tech Side?</h2>
+        <p>Discover how artificial intelligence is transforming modern aviation</p>
+        <a href="ai.html" class="cta-button">Explore AI in Aviation</a>
     </section>
-  </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="images/gm73-logo.png" alt="GM73 Logo" class="footer-logo">
+                <h3>GM73 | The Flying Engineer</h3>
+                <p>Bridging Aviation & Technology</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aviation.html">Aviation</a></li>
+                    <li><a href="ai.html">AI</a></li>
+                </ul>
+                <ul>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="https://github.com/flyingwithgm" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 George Nuyekpe. All rights reserved.</p>
+            <p>From Ghana to the World</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
