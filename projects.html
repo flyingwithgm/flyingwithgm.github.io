@@ -1,58 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects | GM73</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | GM73</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body class="dark-mode">
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">
-      <img src="images/gm73-logo.png" alt="GM73 Logo">
-      <h1>GM73</h1>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="aviation.html">Aviation</a></li>
-      <li><a href="ai.html">AI</a></li>
-      <li><a href="projects.html" class="active">Projects</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <div class="burger">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </nav>
+<body>
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="images/gm73-logo.png" alt="GM73 Logo" class="logo">
+                <span class="brand-name">GM73</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aviation.html">Aviation</a></li>
+                <li><a href="ai.html">AI</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
 
-  <!-- Header -->
-  <header class="page-header">
-    <h1>Projects by GM73</h1>
-    <p>Tech meets takeoff — innovations in code and aviation.</p>
-  </header>
+    <section class="page-hero projects-hero">
+        <div class="hero-content">
+            <h1>PROJECTS</h1>
+            <h2>Building The Future</h2>
+            <p>Where my aviation passion meets technical skills</p>
+        </div>
+    </section>
 
-  <!-- Projects Grid -->
-  <section class="project-cards">
-    <div class="card">
-      <h3>✈️ FlightSim Planner</h3>
-      <p>A simulator tool for modeling aviation systems, helping student pilots and engineers explore real-time airspace logic.</p>
-      <p><em>Status: Coming Soon</em></p>
-    </div>
+    <section class="projects-showcase">
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image" style="background-image: url('images/project-flight-sim.png');">
+                    <div class="project-status">Coming Soon</div>
+                </div>
+                <div class="project-info">
+                    <h3>FlightSim Planner</h3>
+                    <p>A web-based aviation systems simulator designed to help student pilots practice procedures and emergency scenarios in a risk-free environment.</p>
+                    <div class="project-details">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Interactive flight planning tools</li>
+                            <li>Procedural training modules</li>
+                            <li>Emergency scenario simulations</li>
+                            <li>Performance calculations</li>
+                        </ul>
+                        <h4>Technologies:</h4>
+                        <div class="tech-tags">
+                            <span>JavaScript</span>
+                            <span>Three.js</span>
+                            <span>Node.js</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image" style="background-color: #112240;">
+                    <div class="project-status">In Development</div>
+                </div>
+                <div class="project-info">
+                    <h3>AI + Aviation Blog</h3>
+                    <p>An educational resource explaining artificial intelligence concepts through the lens of aviation applications, making technical topics accessible.</p>
+                    <div class="project-details">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Technical articles on AI in aviation</li>
+                            <li>Interactive demonstrations</li>
+                            <li>Case studies of current implementations</li>
+                            <li>Future trend analysis</li>
+                        </ul>
+                        <h4>Technologies:</h4>
+                        <div class="tech-tags">
+                            <span>React</span>
+                            <span>Markdown</span>
+                            <span>Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image" style="background-color: #0c2d48;">
+                    <div class="project-status">Active</div>
+                </div>
+                <div class="project-info">
+                    <h3>GM73 Website</h3>
+                    <p>This personal portfolio website showcasing my journey, skills, and projects at the intersection of aviation and technology.</p>
+                    <div class="project-details">
+                        <h4>Features:</h4>
+                        <ul>
+                            <li>Responsive design</li>
+                            <li>Interactive elements</li>
+                            <li>Multi-page content structure</li>
+                            <li>GitHub hosted</li>
+                        </ul>
+                        <h4>Technologies:</h4>
+                        <div class="tech-tags">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="card">
-      <h3>🌐 GM73 Website</h3>
-      <p>This very site: a futuristic portfolio that blends aviation with tech. Built with HTML, CSS, and custom animations.</p>
-      <a href="index.html" class="btn">View Site</a>
-    </div>
+    <section class="project-ideas">
+        <h2>Future Project Ideas</h2>
+        <div class="ideas-grid">
+            <div class="idea-card">
+                <h3>African Airspace Visualizer</h3>
+                <p>An interactive map showing African flight routes, airports, and aviation infrastructure with growth projections.</p>
+            </div>
+            <div class="idea-card">
+                <h3>Pilot Mental Load Monitor</h3>
+                <p>An AI system that assesses pilot cognitive load during flight operations using biometric data.</p>
+            </div>
+            <div class="idea-card">
+                <h3>Aviation Knowledge Base</h3>
+                <p>A searchable database of aviation regulations, procedures, and best practices with AI-powered Q&A.</p>
+            </div>
+        </div>
+    </section>
 
-    <div class="card">
-      <h3>🧠✈️ AI + Aviation Blog</h3>
-      <p>A Markdown-based blog teaching AI concepts using aviation stories and scenarios. Built with React + Python.</p>
-      <p><em>Status: Under Development</em></p>
-    </div>
-  </section>
+    <section class="cta-section">
+        <h2>Have a Project Idea?</h2>
+        <p>I'm always interested in collaborating on aviation-tech projects</p>
+        <a href="contact.html" class="cta-button">Get In Touch</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="images/gm73-logo.png" alt="GM73 Logo" class="footer-logo">
+                <h3>GM73 | The Flying Engineer</h3>
+                <p>Bridging Aviation & Technology</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aviation.html">Aviation</a></li>
+                    <li><a href="ai.html">AI</a></li>
+                </ul>
+                <ul>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="https://github.com/flyingwithgm" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 George Nuyekpe. All rights reserved.</p>
+            <p>From Ghana to the World</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
