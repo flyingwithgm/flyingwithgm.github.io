@@ -3,129 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | GM73</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Contact | GM73 - The Flying Engineer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Preload contact assets -->
-    <link rel="preload" href="js/contact-map.js" as="script">
-    <link rel="preload" href="js/smart-form.js" as="script">
 </head>
 <body>
-    <!-- Minimal WebGL Background -->
-    <canvas id="contact-background" class="webgl-contact"></canvas>
+    <!-- Interactive Contact Particles -->
+    <div id="contact-particles" class="contact-particles"></div>
     
-    <!-- AR Meeting Button -->
-    <button id="ar-meeting-btn" class="ar-button">
-        <i class="fas fa-vr-cardboard"></i> AR Meeting
-    </button>
-
     <header>
         <!-- Consistent navigation -->
     </header>
 
     <section class="page-hero contact-hero">
         <div class="hero-content">
-            <h1 class="typewriter" data-text="CONNECT WITH GM73"></h1>
-            <h2>Let's Build The Future Together</h2>
-            
-            <!-- 3D Location Map -->
-            <div class="location-map-3d">
-                <div id="map-visualization"></div>
-                <div class="map-coordinates">
-                    <span><i class="fas fa-map-marker-alt"></i> 5°N, 2°W</span>
-                    <span>Takoradi, Ghana</span>
-                </div>
+            <h1 class="glow">CONTACT</h1>
+            <h2 class="typewriter">Let's Connect</h2>
+            <p>Opportunities, collaborations, or just to say hello</p>
+            <div class="hero-cta">
+                <a href="#contact-form" class="cta-button pulse">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </a>
             </div>
         </div>
     </section>
 
     <section class="contact-section">
         <div class="contact-container">
-            <!-- Smart Contact Form -->
-            <form id="smart-contact-form">
-                <div class="form-group">
-                    <label>Purpose of Contact</label>
-                    <div class="ai-suggestions">
-                        <span class="suggestion active" data-type="collaboration">
-                            <i class="fas fa-handshake"></i> Collaboration
-                        </span>
-                        <span class="suggestion" data-type="question">
-                            <i class="fas fa-question-circle"></i> Technical Question
-                        </span>
-                        <span class="suggestion" data-type="speaking">
-                            <i class="fas fa-microphone"></i> Speaking Engagement
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="dynamic-fields">
+            <div class="contact-form" id="contact-form">
+                <h2>Send Me a Message</h2>
+                <form id="contactForm">
                     <div class="form-group">
-                        <label for="contact-name">Full Name</label>
-                        <input type="text" id="contact-name" required>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                        <div class="input-icon"><i class="fas fa-user"></i></div>
                     </div>
-                    
-                    <!-- Fields update based on selection -->
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Your Message</label>
-                    <textarea id="message" rows="5" required></textarea>
-                    <div class="ai-assistance">
-                        <button type="button" id="ai-rewrite">
-                            <i class="fas fa-magic"></i> Improve with AI
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="input-icon"><i class="fas fa-envelope"></i></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="collaboration">Project Collaboration</option>
+                            <option value="opportunity">Career Opportunity</option>
+                            <option value="question">Technical Question</option>
+                            <option value="other">Other Inquiry</option>
+                        </select>
+                        <div class="input-icon"><i class="fas fa-tag"></i></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <div class="input-icon"><i class="fas fa-comment-alt"></i></div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="cta-button">
+                            <i class="fas fa-paper-plane"></i> Send Message
                         </button>
-                        <span class="ai-tip">Tip: Be specific about your aviation-tech interests</span>
+                        <button type="reset" class="cta-button secondary">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </form>
+                <div id="formSuccess" class="form-success">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Message Sent Successfully!</h3>
+                    <p>Thank you for reaching out. I'll get back to you soon.</p>
+                    <button id="sendAnother" class="cta-button small">
+                        <i class="fas fa-envelope"></i> Send Another
+                    </button>
+                </div>
+            </div>
+            <div class="contact-info">
+                <h2>Direct Contacts</h2>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Email</h3>
+                        <a href="mailto:georgenuyekpe@gmail.com">georgenuyekpe@gmail.com</a>
+                        <button class="copy-btn" data-clipboard-text="georgenuyekpe@gmail.com">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
                     </div>
                 </div>
-                
-                <button type="submit" class="cta-button with-ai">
-                    <i class="fas fa-paper-plane"></i> Send Message
-                </button>
-            </form>
-            
-            <div class="contact-alternatives">
-                <h3>Other Ways to Connect:</h3>
-                <div class="alternative-cards">
-                    <a href="https://github.com/flyingwithgm" class="alt-card" target="_blank">
+                <div class="info-card">
+                    <div class="info-icon">
                         <i class="fab fa-github"></i>
-                        <span>GitHub</span>
-                    </a>
-                    <a href="https://linkedin.com/in/yourprofile" class="alt-card" target="_blank">
-                        <i class="fab fa-linkedin"></i>
-                        <span>LinkedIn</span>
-                    </a>
-                    <button class="alt-card" id="schedule-call">
-                        <i class="fas fa-video"></i>
-                        <span>Video Call</span>
-                    </button>
+                    </div>
+                    <div class="info-content">
+                        <h3>GitHub</h3>
+                        <a href="https://github.com/flyingwithgm" target="_blank">github.com/flyingwithgm</a>
+                        <button class="copy-btn" data-clipboard-text="github.com/flyingwithgm">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Location</h3>
+                        <p>Takoradi, Ghana</p>
+                        <button class="map-btn" id="viewMap">
+                            <i class="fas fa-map"></i> View Map
+                        </button>
+                    </div>
+                </div>
+                <div class="contact-social">
+                    <h3>Connect Socially</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="contact-success" id="form-success">
-        <div class="success-content">
-            <i class="fas fa-check-circle"></i>
-            <h2>Message Received!</h2>
-            <p>I'll respond within 24-48 hours. For urgent matters:</p>
-            <a href="mailto:georgenuyekpe@gmail.com" class="email-link">
-                georgenuyekpe@gmail.com
-            </a>
-            <button id="send-another" class="outline-button">
-                Send Another Message
-            </button>
+    <section class="contact-map-section">
+        <h2>Find Me</h2>
+        <div class="map-container" id="contactMap"></div>
+        <div class="map-overlay">
+            <h3>Based in Ghana</h3>
+            <p>Working remotely with partners worldwide</p>
+            <div class="timezone-info">
+                <div class="timezone-current">
+                    <span id="currentTimezone">GMT+00:00</span>
+                    <span id="currentTime">12:00 PM</span>
+                </div>
+                <p>Best times to contact: 9AM - 5PM GMT</p>
+            </div>
         </div>
     </section>
 
-    <footer class="smart-footer">
+    <section class="contact-calendar">
+        <h2>Schedule a Meeting</h2>
+        <div class="calendar-container">
+            <div class="calendar-widget" id="bookingCalendar"></div>
+            <div class="calendar-form">
+                <h3>Book a Video Call</h3>
+                <form id="meetingForm">
+                    <div class="form-group">
+                        <label for="meetingDate">Select Date</label>
+                        <input type="date" id="meetingDate" name="meetingDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="meetingTime">Select Time</label>
+                        <select id="meetingTime" name="meetingTime" required>
+                            <!-- Times populated by JS -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="meetingTopic">Meeting Topic</label>
+                        <input type="text" id="meetingTopic" name="meetingTopic" required>
+                    </div>
+                    <button type="submit" class="cta-button">
+                        <i class="fas fa-calendar-check"></i> Confirm Booking
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="inspiration-section">
+        <div class="quote-container">
+            <blockquote>
+                "The air up there in the clouds is very pure and fine, bracing and delicious. And why shouldn't it be? — it is the same the angels breathe."
+            </blockquote>
+            <p>- Mark Twain</p>
+            <div class="signature">
+                <p>George Nuyekpe</p>
+                <p>GM73 | The Flying Engineer</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Modal -->
+    <div class="map-modal" id="mapModal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-map" id="detailedMap"></div>
+        </div>
+    </div>
+
+    <footer>
         <!-- Consistent footer -->
     </footer>
 
-    <!-- Contact-specific JS -->
-    <script src="js/contact-map.js" type="module"></script>
-    <script src="js/smart-form.js" type="module"></script>
-    <script src="js/ar-features.js" type="module"></script>
-    <script src="js/main.js" type="module"></script>
+    <!-- Contact Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro@1.4.0/build/vanilla-calendar.min.js"></script>
+    <script src="contact.js" type="module"></script>
 </body>
 </html>
