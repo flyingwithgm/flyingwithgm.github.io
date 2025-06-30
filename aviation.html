@@ -1,58 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aviation | GM73</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- [Same head content as previously shown] -->
 </head>
 <body>
+    <!-- [WebGL Background and Voice Interface as before] -->
+
     <header>
-        <nav>
-            <div class="logo-container">
-                <img src="images/gm73-logo.png" alt="GM73 Logo" class="logo">
-                <span class="brand-name">GM73</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="aviation.html" class="active">Aviation</a></li>
-                <li><a href="ai.html">AI</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
+        <!-- [Same navigation as index.html] -->
     </header>
 
     <section class="page-hero aviation-hero">
-        <div class="hero-content">
-            <h1>AVIATION</h1>
-            <h2>The Sky Is Not The Limit</h2>
-            <p>Understanding the science, art, and future of flight</p>
-        </div>
+        <!-- [Hero content with flight path visualization as before] -->
     </section>
 
     <section class="aviation-intro">
+        <!-- 3D Aircraft Viewer -->
+        <div class="aircraft-viewer">
+            <div id="aircraft-3d" class="aircraft-model"></div>
+            <div class="aircraft-selector">
+                <button data-model="cessna172" class="active">Cessna 172</button>
+                <button data-model="boeing737">Boeing 737</button>
+                <button data-model="atr72">ATR 72</button>
+            </div>
+        </div>
+        
         <div class="section-content">
             <h2>What is Aviation?</h2>
-            <p>Aviation is the science and practice of flight through the air. It encompasses everything from the design and operation of aircraft to the infrastructure that supports air travel. For me, aviation represents the perfect marriage of human ingenuity and technological progress.</p>
-            
-            <div class="flight-path-animation">
-                <div class="airplane-icon">
-                    <i class="fas fa-plane"></i>
+            <p>Aviation represents human ingenuity in conquering the skies. For me, it's the perfect marriage of:</p>
+            <div class="aviation-pillars">
+                <div class="pillar">
+                    <i class="fas fa-atom"></i>
+                    <h3>Science</h3>
+                    <p>Aerodynamics, meteorology, and physics</p>
                 </div>
-                <div class="path"></div>
-                <div class="waypoints">
-                    <div class="waypoint" style="left: 10%;">Takeoff</div>
-                    <div class="waypoint" style="left: 30%;">Climb</div>
-                    <div class="waypoint" style="left: 50%;">Cruise</div>
-                    <div class="waypoint" style="left: 70%;">Descent</div>
-                    <div class="waypoint" style="left: 90%;">Landing</div>
+                <div class="pillar">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Technology</h3>
+                    <p>Advanced materials and avionics systems</p>
+                </div>
+                <div class="pillar">
+                    <i class="fas fa-brain"></i>
+                    <h3>Human Skill</h3>
+                    <p>Precision, decision-making, and discipline</p>
                 </div>
             </div>
         </div>
@@ -60,138 +50,87 @@
 
     <section class="licenses-section">
         <h2>Pilot License Path</h2>
-        <div class="licenses-grid">
-            <div class="license-card">
-                <h3>PPL</h3>
-                <h4>Private Pilot License</h4>
-                <ul>
-                    <li>Fly single-engine aircraft</li>
-                    <li>Cannot be paid to fly</li>
-                    <li>~50-70 flight hours</li>
-                    <li>Basic navigation & meteorology</li>
-                </ul>
+        
+        <!-- 3D License Progress Visualization -->
+        <div class="license-progress-3d">
+            <div class="license-track" id="license-track">
+                <div class="milestone" data-license="ppl">PPL</div>
+                <div class="milestone" data-license="cpl">CPL</div>
+                <div class="milestone" data-license="atpl">ATPL</div>
             </div>
-            <div class="license-card">
-                <h3>CPL</h3>
-                <h4>Commercial Pilot License</h4>
-                <ul>
-                    <li>Fly for compensation</li>
-                    <li>~150-200 flight hours</li>
-                    <li>Advanced flight operations</li>
-                    <li>Instrument rating required</li>
-                </ul>
-            </div>
-            <div class="license-card">
-                <h3>ATPL</h3>
-                <h4>Air Transport Pilot License</h4>
-                <ul>
-                    <li>Command aircraft >5700kg</li>
-                    <li>~1500 flight hours</li>
-                    <li>Airline transport operations</li>
-                    <li>Highest civilian certification</li>
-                </ul>
-            </div>
+            <div class="progress-plane" id="progress-plane">✈</div>
         </div>
-        <div class="license-path">
-            <p>My planned path: Complete Computer Science degree → Save for flight training → Earn PPL → CPL → ATPL while working in aviation-tech field</p>
+        
+        <div class="licenses-grid">
+            <div class="license-card" data-license="ppl">
+                <h3>Private Pilot License (PPL)</h3>
+                <div class="license-progress">
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 65%"></div>
+                    </div>
+                    <span>65% Theory Completed</span>
+                </div>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Air Law & Procedures</li>
+                    <li><i class="fas fa-check-circle"></i> Human Performance</li>
+                    <li><i class="fas fa-spinner"></i> Meteorology (In Progress)</li>
+                </ul>
+            </div>
+            
+            <!-- [Additional license cards...] -->
+        </div>
+    </section>
+
+    <section class="africa-aviation">
+        <h2>African Aviation Vision</h2>
+        <div class="africa-content">
+            <div class="africa-text">
+                <p>Africa's aviation industry is projected to grow 5% annually, yet faces unique challenges:</p>
+                <div class="challenge-grid">
+                    <div class="challenge">
+                        <div class="challenge-icon">
+                            <i class="fas fa-chart-line"></i>
+                            <div class="pulse-effect"></div>
+                        </div>
+                        <h3>Rapid Growth</h3>
+                        <p>Demand outpacing infrastructure</p>
+                    </div>
+                    <!-- [Additional challenges...] -->
+                </div>
+            </div>
+            <div class="africa-map">
+                <div id="africa-3d-map"></div>
+                <div class="map-legend">
+                    <span class="legend-item"><span class="color-dot growth"></span> Growth Areas</span>
+                    <span class="legend-item"><span class="color-dot challenge"></span> Challenges</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="tools-section">
         <h2>Modern Pilot Tools</h2>
-        <div class="tools-grid">
+        <div class="tools-carousel">
             <div class="tool-card">
-                <div class="tool-icon">
-                    <i class="fas fa-satellite-dish"></i>
+                <div class="tool-visual">
+                    <div class="tool-3d" data-tool="fms"></div>
                 </div>
-                <h3>Avionics Systems</h3>
-                <p>Glass cockpits with integrated flight management systems (FMS) and GPS navigation</p>
+                <h3>Flight Management System</h3>
+                <p>Advanced navigation and performance computer</p>
+                <button class="demo-btn" data-demo="fms">View Demo</button>
             </div>
-            <div class="tool-card">
-                <div class="tool-icon">
-                    <i class="fas fa-wifi"></i>
-                </div>
-                <h3>Data Link Communications</h3>
-                <p>ACARS for text-based communication with ATC and airlines</p>
-            </div>
-            <div class="tool-card">
-                <div class="tool-icon">
-                    <i class="fas fa-cloud-sun-rain"></i>
-                </div>
-                <h3>Weather Radar</h3>
-                <p>Onboard systems to detect and avoid severe weather</p>
-            </div>
-            <div class="tool-card">
-                <div class="tool-icon">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <h3>Autopilot Systems</h3>
-                <p>Advanced automation for cruise, approach, and landing phases</p>
-            </div>
+            <!-- [Additional tool cards...] -->
         </div>
     </section>
 
-    <section class="africa-section">
-        <h2>Why Africa Needs Tech-Savvy Pilots</h2>
-        <div class="africa-content">
-            <div class="africa-text">
-                <p>Africa's aviation industry is projected to grow by 5% annually, faster than the global average. Yet the continent faces:</p>
-                <ul>
-                    <li>Shortage of trained aviation professionals</li>
-                    <li>Limited adoption of modern aviation technologies</li>
-                    <li>Insufficient infrastructure for growing demand</li>
-                    <li>Need for localized solutions to unique challenges</li>
-                </ul>
-                <p>As a Ghanaian with both technical and aviation training, I aim to bridge this gap by:</p>
-                <ul>
-                    <li>Developing cost-effective training tools</li>
-                    <li>Creating systems tailored to African aviation needs</li>
-                    <li>Mentoring the next generation of African aviators</li>
-                    <li>Advocating for technology adoption in regional aviation</li>
-                </ul>
-            </div>
-            <div class="africa-map">
-                <!-- This would be an SVG or image of Africa with flight paths -->
-                <div class="map-placeholder">
-                    <i class="fas fa-map-marked-alt"></i>
-                    <p>African Aviation Growth Map</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section">
-        <h2>Ready to Explore the Tech Side?</h2>
-        <p>Discover how artificial intelligence is transforming modern aviation</p>
-        <a href="ai.html" class="cta-button">Explore AI in Aviation</a>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <img src="images/gm73-logo.png" alt="GM73 Logo" class="footer-logo">
-                <h3>GM73 | The Flying Engineer</h3>
-                <p>Bridging Aviation & Technology</p>
-            </div>
-            <div class="footer-links">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="aviation.html">Aviation</a></li>
-                    <li><a href="ai.html">AI</a></li>
-                </ul>
-                <ul>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="https://github.com/flyingwithgm" target="_blank">GitHub</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 George Nuyekpe. All rights reserved.</p>
-            <p>From Ghana to the World</p>
-        </div>
+    <footer class="smart-footer">
+        <!-- [Same footer as index.html] -->
     </footer>
 
-    <script src="script.js"></script>
+    <!-- JavaScript Files -->
+    <script src="js/radar-background.js" type="module"></script>
+    <script src="js/aircraft-viewer.js" type="module"></script>
+    <script src="js/aviation-commands.js" type="module"></script>
+    <script src="js/main.js" type="module"></script>
 </body>
 </html>
