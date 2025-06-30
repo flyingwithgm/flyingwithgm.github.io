@@ -1,250 +1,197 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GM73 | The Flying Engineer</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="logo-container">
-                <img src="images/gm73-logo.png" alt="GM73 Logo" class="logo">
-                <span class="brand-name">GM73</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="aviation.html">Aviation</a></li>
-                <li><a href="ai.html">AI</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
-    </header>
+import streamlit as st
+import pandas as pd
+import os
+from datetime import datetime
+import uuid
+import google.generativeai as genai
+import requests
+from requests_oauthlib import OAuth1
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="glow">THE FLYING ENGINEER</h1>
-            <h2>George Nuyekpe | Ghana's Aviation-Tech Visionary</h2>
-            <p>Bridging the gap between computer science and aviation to create safer, smarter flight systems</p>
-            <a href="#about" class="cta-button">Explore My Journey</a>
-        </div>
-        <div class="scroll-indicator">
-            <span></span>
-        </div>
-    </section>
+DATA_FILE = "posts.csv"
+UPLOAD_FOLDER = "uploads"
+GEMINI_API_KEY = "Hide"
 
-    <section id="about" class="about-section">
-        <div class="profile-container">
-            <img src="images/george-profile.jpg" alt="George Nuyekpe" class="profile-img">
-            <div class="profile-details">
-                <h2>From Takoradi to The World</h2>
-                <p>Born and raised in rural Ghana, I've always been fascinated by the intersection of technology and aviation. Despite limited resources, I've maintained an unwavering focus on my goals of becoming both an ATPL-certified pilot and a computer scientist specializing in AI for aviation systems.</p>
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <span class="counter" data-target="19">0</span>
-                        <span>Years Old</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="counter" data-target="8">0</span>
-                        <span>A1 Grades</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="counter" data-target="2">0</span>
-                        <span>Career Paths</span>
-                    </div>
-                    <div class="stat-box">
-                        <span>∞</span>
-                        <span>Ambition</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+API_KEY = "Hide"
+API_SECRET = "Hide"
+ACCESS_TOKEN = "Hide"
+ACCESS_TOKEN_SECRET = "Hide"
 
-    <section class="timeline-section">
-        <h2>My Flight Path</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>2018 - BECE Excellence</h3>
-                    <p>Graduated Junior High with Grade 1 in all 9 subjects, demonstrating early academic excellence.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>2021 - WASSCE Achievement</h3>
-                    <p>Earned 6 A1s and 2 B2s at Achimota School, one of Ghana's premier institutions.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>2023 - UMass Dartmouth</h3>
-                    <p>Accepted to study Computer Science with AI in the US, currently deferring to secure optimal funding.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>2025 - Self-Education</h3>
-                    <p>Teaching myself aviation theory, programming, and building projects that combine both fields.</p>
-                </div>
-            </div>
-            <div class="timeline-item future">
-                <div class="timeline-content">
-                    <h3>2028 - CS Degree</h3>
-                    <p>Complete Computer Science degree with AI specialization.</p>
-                </div>
-            </div>
-            <div class="timeline-item future">
-                <div class="timeline-content">
-                    <h3>2030 - Flight Training</h3>
-                    <p>Begin professional pilot training to earn ATPL certification.</p>
-                </div>
-            </div>
-            <div class="timeline-item future">
-                <div class="timeline-content">
-                    <h3>2035 - Aviation-Tech Leader</h3>
-                    <p>Developing intelligent aviation systems as both a certified pilot and computer scientist.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+# When creating the initial CSV file
+if not os.path.exists(DATA_FILE):
+    df = pd.DataFrame(columns=["id", "platform", "type", "text", "image", "status", "scheduled_time", "created_at"])
+    df.to_csv(DATA_FILE, index=False, encoding="utf-8")
 
-    <section class="skills-section">
-        <h2>Dual-Engine Skillset</h2>
-        <div class="skills-container">
-            <div class="skill-category">
-                <h3><i class="fas fa-plane"></i> Aviation</h3>
-                <div class="skill">
-                    <span>Flight Theory</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 65%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>Navigation</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 50%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>Meteorology</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 45%"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="skill-category">
-                <h3><i class="fas fa-code"></i> Technology</h3>
-                <div class="skill">
-                    <span>Programming</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 75%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>AI Concepts</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 60%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>Web Development</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 80%"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="skill-category">
-                <h3><i class="fas fa-brain"></i> Personal</h3>
-                <div class="skill">
-                    <span>Discipline</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 95%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>Strategic Thinking</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 85%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>Adaptability</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 90%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-    <section class="projects-preview">
-        <h2>Current Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-image" style="background-image: url('images/project-flight-sim.png');"></div>
-                <div class="project-info">
-                    <h3>FlightSim Planner</h3>
-                    <p>An aviation systems simulator for training and scenario planning (Coming Soon)</p>
-                    <a href="projects.html" class="project-link">Learn More</a>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-image" style="background-color: #112240;"></div>
-                <div class="project-info">
-                    <h3>AI + Aviation Blog</h3>
-                    <p>Exploring the intersection of artificial intelligence and modern aviation (In Development)</p>
-                    <a href="projects.html" class="project-link">Learn More</a>
-                </div>
-            </div>
-        </div>
-        <a href="projects.html" class="cta-button secondary">View All Projects</a>
-    </section>
+df = pd.read_csv(DATA_FILE)
 
-    <section class="cta-section">
-        <h2>Ready for Takeoff?</h2>
-        <p>Join me on this journey to revolutionize aviation through technology</p>
-        <div class="cta-buttons">
-            <a href="contact.html" class="cta-button">Get In Touch</a>
-            <a href="aviation.html" class="cta-button secondary">Explore Aviation</a>
-        </div>
-    </section>
+genai.configure(api_key=GEMINI_API_KEY)
+model = genai.GenerativeModel("models/gemini-1.5-flash-latest")
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <img src="images/gm73-logo.png" alt="GM73 Logo" class="footer-logo">
-                <h3>GM73 | The Flying Engineer</h3>
-                <p>Bridging Aviation & Technology</p>
-            </div>
-            <div class="footer-links">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="aviation.html">Aviation</a></li>
-                    <li><a href="ai.html">AI</a></li>
-                </ul>
-                <ul>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="https://github.com/flyingwithgm" target="_blank">GitHub</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 George Nuyekpe. All rights reserved.</p>
-            <p>From Ghana to the World</p>
-        </div>
-    </footer>
+if "ai_content" not in st.session_state:
+    st.session_state.ai_content = ""
 
-    <script src="script.js"></script>
-</body>
-</html>
+st.set_page_config(page_title="AI Social Media Scheduler", page_icon="📲")
+st.title("Shakti-AI: Your AI Social Media Assistant")
+st.write("📲 AI-Powered Social Media Post Scheduler + Twitter Uploader")
+
+platform = st.selectbox("Select Platform", ["Twitter", "Instagram"])
+post_type = st.selectbox("Post Type", ["Motivational", "Technical", "Funny", "Announcement", "Promotional"])
+user_input = st.text_area("🔎 Describe your idea", placeholder="e.g. New product launch, Python tips, etc.")
+word_limit = st.slider("🔢 Set Word Limit", min_value=20, max_value=300, value=100)
+image = st.file_uploader("📷 Upload Image (optional)", type=["jpg", "jpeg", "png"])
+post_time = st.time_input("⏰ Schedule Time")
+
+def generate_ai_content():
+    prompt = f"Write a {post_type.lower()} style post for {platform}. Limit it to {word_limit} words. Topic: {user_input}"
+    try:
+        response = model.generate_content(prompt)
+        st.session_state.ai_content = response.text.strip()
+        st.success("✅ Content generated!")
+    except Exception as e:
+        st.error(f"❌ Error: {e}")
+
+col1, col2 = st.columns(2)
+with col1:
+    if st.button("✨ Generate Content"):
+        generate_ai_content()
+
+with col2:
+    if st.button("🔁 Regenerate"):
+        generate_ai_content()
+
+if st.session_state.ai_content:
+    st.subheader("✍️ Generated Content (Editable)")
+    edited_content = st.text_area("Edit before scheduling/posting:", value=st.session_state.ai_content, height=150)
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        if st.button("✅ Schedule Post"):
+            post_id = str(uuid.uuid4())
+            image_name = None
+
+            if image:
+                image_name = f"{post_id}_{image.name}"
+                with open(os.path.join(UPLOAD_FOLDER, image_name), "wb") as f:
+                    f.write(image.getbuffer())
+
+            new_post = {
+                "id": post_id,
+                "platform": platform,
+                "type": post_type,
+                "text": edited_content,
+                "image": image_name,
+                "status": "Pending",
+                "scheduled_time": post_time.strftime("%H:%M"),
+                "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            }
+
+            df = pd.concat([df, pd.DataFrame([new_post])], ignore_index=True)
+            df.to_csv(DATA_FILE, index=False, encoding="utf-8")
+            st.success("✅ Post scheduled!")
+            st.session_state.ai_content = ""
+
+    with col2:
+        if platform == "Twitter" and st.button("🚀 Post to Twitter"):
+            mock_mode = False  
+            
+            if mock_mode:
+                st.success("🚀 Tweet posted successfully! (MOCK MODE)")
+                st.info(f"Tweet content: {edited_content}")
+          
+                with open("mock_tweets.txt", "a", encoding="utf-8") as f:
+                    f.write(f"[{datetime.now()}] {edited_content}\n")
+            else:
+                try:
+                    url = "https://api.twitter.com/2/tweets"
+                    payload = {"text": edited_content}
+                    
+                    st.info("Sending request to Twitter API...")
+                    
+                    auth = OAuth1(
+                        API_KEY, 
+                        API_SECRET,
+                        ACCESS_TOKEN, 
+                        ACCESS_TOKEN_SECRET
+                    )
+                    
+                    response = requests.post(url, json=payload, auth=auth)
+                    
+                    st.write(f"Response status code: {response.status_code}")
+                    
+                    if response.status_code == 201:
+                        st.success("🚀 Tweet posted successfully!")
+                    else:
+                        st.error(f"❌ Failed to post tweet: {response.status_code}")
+                        st.write("Error details:")
+                        st.json(response.json() if response.content else {"message": "No response content"})
+                        
+                        if response.status_code == 403:
+                            st.warning("""
+                            This is likely a permissions issue. Please check:
+                            1. Your Twitter Developer account has paid access (Basic tier minimum)
+                            2. Your app has 'Write' permissions enabled
+                            3. Your tokens are correctly configured with tweet.write scope
+                            """)
+                        elif response.status_code == 401:
+                            st.warning("Authentication failed. Your API keys may be invalid or expired.")
+                    
+                except Exception as e:
+                    st.error(f"❌ Exception when posting to Twitter: {str(e)}")
+
+    with col3:
+        if st.button("❌ Reject"):
+            st.session_state.ai_content = ""
+            st.info("🗑️ Content cleared.")
+
+st.header("📟 Review Pending Posts")
+pending_df = df[df["status"] == "Pending"]
+for idx, row in pending_df.iterrows():
+    st.markdown("---")
+    st.write(f"*Platform:* {row['platform']}")
+    st.write(f"*Type:* {row['type']}")
+    st.write(f"*Content:* {row['text']}")
+    st.write(f"*Scheduled at:* {row['scheduled_time']}")
+    if pd.notna(row['image']):
+        st.image(os.path.join(UPLOAD_FOLDER, row['image']), width=250)
+
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("✅ Approve", key=f"approve_{row['id']}"):
+            df.loc[df['id'] == row['id'], 'status'] = 'Approved'
+            df.to_csv(DATA_FILE, index=False, encoding="utf-8")
+            st.success(f"Post {row['id']} approved!")
+    with col2:
+        if st.button("❌ Reject", key=f"reject_{row['id']}"):
+            df.loc[df['id'] == row['id'], 'status'] = 'Rejected'
+            df.to_csv(DATA_FILE, index=False, encoding="utf-8")
+            st.warning(f"Post {row['id']} rejected.")
+
+st.markdown("---")
+st.subheader("📊 Sample Scheduled Posts (Demo Only)")
+dummy_data = pd.DataFrame([
+    {
+        "Username": "Pushpendra",
+        "Platform": "Instagram",
+        "Post Type": "Motivational",
+        "Content": "Success doesn't come from what you do occasionally, it comes from what you do consistently.",
+        "Time": "09:00 AM"
+    },
+    {
+        "Username": "mohit_dev",
+        "Platform": "Twitter",
+        "Post Type": "Technical",
+        "Content": "Use list comprehensions in Python for cleaner and faster code! 🐍 #PythonTips",
+        "Time": "12:30 PM"
+    },
+    {
+        "Username": "aryan_fun",
+        "Platform": "Instagram",
+        "Post Type": "Funny",
+        "Content": "When the code works on the first try… suspicious but grateful 😂💻",
+        "Time": "05:45 PM"
+    }
+])
+st.dataframe(dummy_data, use_container_width=True)
