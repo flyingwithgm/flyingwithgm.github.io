@@ -1,136 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- [Same head content as previously shown] -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviation | GM73 - The Flying Engineer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- OpenGraph and other meta tags -->
 </head>
 <body>
-    <!-- [WebGL Background and Voice Interface as before] -->
-
+    <!-- 3D Globe Visualization -->
+    <div id="globe-container" class="globe-visualization"></div>
+    
     <header>
-        <!-- [Same navigation as index.html] -->
+        <nav>
+            <div class="logo-container">
+                <img src="images/gm73-logo.png" alt="GM73 Logo" class="logo">
+                <span class="brand-name">GM73</span>
+                <span class="brand-subtitle">The Flying Engineer</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> <span>Home</span></a></li>
+                <li><a href="aviation.html" class="active"><i class="fas fa-plane"></i> <span>Aviation</span></a></li>
+                <li><a href="ai.html"><i class="fas fa-robot"></i> <span>AI</span></a></li>
+                <li><a href="projects.html"><i class="fas fa-code-branch"></i> <span>Projects</span></a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
+            </ul>
+            <div class="nav-extras">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <section class="page-hero aviation-hero">
-        <!-- [Hero content with flight path visualization as before] -->
+        <div class="hero-content">
+            <h1 class="glow">AVIATION</h1>
+            <h2 class="typewriter">The Sky Is Not The Limit</h2>
+            <p>Understanding the science, art, and future of flight</p>
+            <div class="hero-cta">
+                <a href="#flight-tracker" class="cta-button pulse">
+                    <i class="fas fa-satellite-dish"></i> Live Flight Tracker
+                </a>
+            </div>
+        </div>
+        <div class="aircraft-silhouette"></div>
     </section>
 
     <section class="aviation-intro">
-        <!-- 3D Aircraft Viewer -->
-        <div class="aircraft-viewer">
-            <div id="aircraft-3d" class="aircraft-model"></div>
-            <div class="aircraft-selector">
-                <button data-model="cessna172" class="active">Cessna 172</button>
-                <button data-model="boeing737">Boeing 737</button>
-                <button data-model="atr72">ATR 72</button>
-            </div>
-        </div>
-        
         <div class="section-content">
             <h2>What is Aviation?</h2>
-            <p>Aviation represents human ingenuity in conquering the skies. For me, it's the perfect marriage of:</p>
-            <div class="aviation-pillars">
-                <div class="pillar">
-                    <i class="fas fa-atom"></i>
-                    <h3>Science</h3>
-                    <p>Aerodynamics, meteorology, and physics</p>
+            <p>Aviation is the science and practice of flight through the air. It encompasses everything from the design and operation of aircraft to the infrastructure that supports air travel. For me, aviation represents the perfect marriage of human ingenuity and technological progress.</p>
+            
+            <div class="interactive-flight-path">
+                <div class="flight-controls">
+                    <button class="flight-btn" id="playFlight"><i class="fas fa-play"></i></button>
+                    <button class="flight-btn" id="pauseFlight"><i class="fas fa-pause"></i></button>
+                    <button class="flight-btn" id="resetFlight"><i class="fas fa-redo"></i></button>
+                    <select class="flight-select" id="flightPhase">
+                        <option value="full">Full Flight</option>
+                        <option value="takeoff">Takeoff</option>
+                        <option value="cruise">Cruise</option>
+                        <option value="landing">Landing</option>
+                    </select>
                 </div>
-                <div class="pillar">
-                    <i class="fas fa-cogs"></i>
-                    <h3>Technology</h3>
-                    <p>Advanced materials and avionics systems</p>
+                <div class="flight-animation-container">
+                    <div class="flight-path-visual" id="flightPathVisual"></div>
+                    <div class="flight-data-panel">
+                        <div class="flight-metric">
+                            <span class="metric-label">Altitude</span>
+                            <span class="metric-value" id="altitudeValue">0</span>
+                            <span class="metric-unit">ft</span>
+                        </div>
+                        <div class="flight-metric">
+                            <span class="metric-label">Speed</span>
+                            <span class="metric-value" id="speedValue">0</span>
+                            <span class="metric-unit">kts</span>
+                        </div>
+                        <div class="flight-metric">
+                            <span class="metric-label">Heading</span>
+                            <span class="metric-value" id="headingValue">000</span>
+                            <span class="metric-unit">°</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="pillar">
-                    <i class="fas fa-brain"></i>
-                    <h3>Human Skill</h3>
-                    <p>Precision, decision-making, and discipline</p>
+                <div class="flight-legend">
+                    <div class="legend-item"><span class="legend-color takeoff"></span> Takeoff</div>
+                    <div class="legend-item"><span class="legend-color climb"></span> Climb</div>
+                    <div class="legend-item"><span class="legend-color cruise"></span> Cruise</div>
+                    <div class="legend-item"><span class="legend-color descent"></span> Descent</div>
+                    <div class="legend-item"><span class="legend-color landing"></span> Landing</div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="flight-tracker" class="live-flight-tracker">
+        <h2>Live Flight Tracker</h2>
+        <div class="tracker-container">
+            <div class="tracker-map" id="flightTrackerMap"></div>
+            <div class="tracker-controls">
+                <div class="tracker-search">
+                    <input type="text" id="flightSearch" placeholder="Search flights (e.g., BA117)">
+                    <button id="searchFlight"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="tracker-filters">
+                    <div class="filter-group">
+                        <label><input type="checkbox" name="flightType" value="commercial" checked> Commercial</label>
+                        <label><input type="checkbox" name="flightType" value="cargo"> Cargo</label>
+                        <label><input type="checkbox" name="flightType" value="private"> Private</label>
+                    </div>
+                    <div class="filter-group">
+                        <label>Altitude Range:</label>
+                        <input type="range" id="altitudeRange" min="0" max="50000" value="50000">
+                        <span id="altitudeDisplay">0-50,000 ft</span>
+                    </div>
+                </div>
+                <div class="tracker-stats">
+                    <div class="stat-card">
+                        <h3>Flights Tracked</h3>
+                        <p class="stat-value" id="flightsTracked">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>In Ghana Airspace</h3>
+                        <p class="stat-value" id="ghanaFlights">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Avg. Altitude</h3>
+                        <p class="stat-value" id="avgAltitude">0 ft</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flight-details-modal" id="flightDetails">
+            <div class="modal-content">
+                <button class="modal-close">&times;</button>
+                <h3 id="flightNumber">Flight BA117</h3>
+                <div class="flight-info-grid">
+                    <div class="flight-info">
+                        <h4>Route</h4>
+                        <p id="flightRoute">ACC → LHR</p>
+                    </div>
+                    <div class="flight-info">
+                        <h4>Aircraft</h4>
+                        <p id="flightAircraft">Boeing 787-9 Dreamliner</p>
+                    </div>
+                    <div class="flight-info">
+                        <h4>Status</h4>
+                        <p id="flightStatus">In Flight</p>
+                    </div>
+                    <div class="flight-info">
+                        <h4>Altitude</h4>
+                        <p id="flightCurrentAltitude">36,000 ft</p>
+                    </div>
+                    <div class="flight-info">
+                        <h4>Speed</h4>
+                        <p id="flightCurrentSpeed">520 kts</p>
+                    </div>
+                    <div class="flight-info">
+                        <h4>Heading</h4>
+                        <p id="flightCurrentHeading">312°</p>
+                    </div>
+                </div>
+                <div class="flight-progress">
+                    <h4>Route Progress</h4>
+                    <div class="progress-bar">
+                        <div class="progress" id="routeProgress" style="width: 65%"></div>
+                    </div>
+                    <div class="progress-labels">
+                        <span id="departureAirport">ACC</span>
+                        <span id="arrivalAirport">LHR</span>
+                    </div>
+                </div>
+                <div class="flight-3dview" id="flight3dView"></div>
             </div>
         </div>
     </section>
 
     <section class="licenses-section">
         <h2>Pilot License Path</h2>
-        
-        <!-- 3D License Progress Visualization -->
-        <div class="license-progress-3d">
-            <div class="license-track" id="license-track">
-                <div class="milestone" data-license="ppl">PPL</div>
-                <div class="milestone" data-license="cpl">CPL</div>
-                <div class="milestone" data-license="atpl">ATPL</div>
-            </div>
-            <div class="progress-plane" id="progress-plane">✈</div>
-        </div>
-        
         <div class="licenses-grid">
-            <div class="license-card" data-license="ppl">
-                <h3>Private Pilot License (PPL)</h3>
-                <div class="license-progress">
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 65%"></div>
-                    </div>
-                    <span>65% Theory Completed</span>
+            <div class="license-card">
+                <div class="license-badge" data-license="ppl">
+                    <div class="badge-icon"><i class="fas fa-certificate"></i></div>
+                    <h3>PPL</h3>
                 </div>
+                <h4>Private Pilot License</h4>
                 <ul>
-                    <li><i class="fas fa-check-circle"></i> Air Law & Procedures</li>
-                    <li><i class="fas fa-check-circle"></i> Human Performance</li>
-                    <li><i class="fas fa-spinner"></i> Meteorology (In Progress)</li>
+                    <li>Fly single-engine aircraft</li>
+                    <li>Cannot be paid to fly</li>
+                    <li>~50-70 flight hours</li>
+                    <li>Basic navigation & meteorology</li>
                 </ul>
+                <button class="license-more" data-license="ppl">View Requirements</button>
             </div>
-            
-            <!-- [Additional license cards...] -->
+            <!-- Other license cards -->
+        </div>
+        <div class="license-path-visual">
+            <div class="path-container">
+                <div class="path-progress" id="licensePath"></div>
+                <div class="path-milestones">
+                    <div class="milestone" data-license="ppl">
+                        <div class="milestone-dot"></div>
+                        <div class="milestone-label">PPL</div>
+                    </div>
+                    <!-- Other milestones -->
+                </div>
+            </div>
+            <div class="path-description">
+                <p>My planned path: Complete Computer Science degree → Save for flight training → Earn PPL → CPL → ATPL while working in aviation-tech field</p>
+                <div class="path-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025-2027</div>
+                        <div class="timeline-content">Computer Science Degree</div>
+                    </div>
+                    <!-- Other timeline items -->
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="africa-aviation">
-        <h2>African Aviation Vision</h2>
+    <section class="aircraft-systems-section">
+        <h2>Aircraft Systems Explorer</h2>
+        <div class="systems-explorer">
+            <div class="systems-3dview" id="aircraft3dView">
+                <div class="systems-controls">
+                    <button class="system-btn" data-system="all"><i class="fas fa-plane"></i> Full Aircraft</button>
+                    <button class="system-btn" data-system="avionics"><i class="fas fa-microchip"></i> Avionics</button>
+                    <button class="system-btn" data-system="engine"><i class="fas fa-cogs"></i> Engine</button>
+                    <button class="system-btn" data-system="flight-controls"><i class="fas fa-gamepad"></i> Flight Controls</button>
+                    <button class="system-btn" data-system="fuel"><i class="fas fa-gas-pump"></i> Fuel System</button>
+                </div>
+            </div>
+            <div class="systems-info" id="systemInfo">
+                <div class="info-header">
+                    <h3 id="systemName">Aircraft Systems</h3>
+                    <div class="system-diagram" id="systemDiagram"></div>
+                </div>
+                <div class="info-content" id="systemContent">
+                    <p>Select a system to explore its components and functionality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="africa-section">
+        <h2>Why Africa Needs Tech-Savvy Pilots</h2>
         <div class="africa-content">
             <div class="africa-text">
-                <p>Africa's aviation industry is projected to grow 5% annually, yet faces unique challenges:</p>
-                <div class="challenge-grid">
-                    <div class="challenge">
-                        <div class="challenge-icon">
-                            <i class="fas fa-chart-line"></i>
-                            <div class="pulse-effect"></div>
+                <p>Africa's aviation industry is projected to grow by 5% annually, faster than the global average. Yet the continent faces:</p>
+                <ul>
+                    <li>Shortage of trained aviation professionals</li>
+                    <li>Limited adoption of modern aviation technologies</li>
+                    <li>Insufficient infrastructure for growing demand</li>
+                    <li>Need for localized solutions to unique challenges</li>
+                </ul>
+                <div class="africa-data">
+                    <div class="data-card">
+                        <h3>Projected Growth</h3>
+                        <div class="data-visual">
+                            <canvas id="africaGrowthChart"></canvas>
                         </div>
-                        <h3>Rapid Growth</h3>
-                        <p>Demand outpacing infrastructure</p>
                     </div>
-                    <!-- [Additional challenges...] -->
+                    <div class="data-card">
+                        <h3>Current Challenges</h3>
+                        <div class="data-visual">
+                            <canvas id="africaChallengesChart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="africa-map">
-                <div id="africa-3d-map"></div>
+                <div class="map-container" id="africaAviationMap"></div>
                 <div class="map-legend">
-                    <span class="legend-item"><span class="color-dot growth"></span> Growth Areas</span>
-                    <span class="legend-item"><span class="color-dot challenge"></span> Challenges</span>
+                    <div class="legend-item"><span class="legend-color international"></span> International Airports</div>
+                    <div class="legend-item"><span class="legend-color domestic"></span> Domestic Airports</div>
+                    <div class="legend-item"><span class="legend-color planned"></span> Planned Expansion</div>
+                    <div class="legend-item"><span class="legend-color route"></span> Major Flight Routes</div>
+                </div>
+                <div class="map-timeline">
+                    <input type="range" id="mapYearSlider" min="2023" max="2040" value="2023">
+                    <div class="timeline-labels">
+                        <span>2023</span>
+                        <span id="currentYear">2023</span>
+                        <span>2040</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="tools-section">
-        <h2>Modern Pilot Tools</h2>
-        <div class="tools-carousel">
-            <div class="tool-card">
-                <div class="tool-visual">
-                    <div class="tool-3d" data-tool="fms"></div>
-                </div>
-                <h3>Flight Management System</h3>
-                <p>Advanced navigation and performance computer</p>
-                <button class="demo-btn" data-demo="fms">View Demo</button>
-            </div>
-            <!-- [Additional tool cards...] -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2>Ready to Explore the Tech Side?</h2>
+            <p>Discover how artificial intelligence is transforming modern aviation</p>
+            <a href="ai.html" class="cta-button pulse">
+                <i class="fas fa-robot"></i> Explore AI in Aviation
+            </a>
         </div>
     </section>
 
-    <footer class="smart-footer">
-        <!-- [Same footer as index.html] -->
+    <footer>
+        <!-- Same footer as index.html -->
     </footer>
 
-    <!-- JavaScript Files -->
-    <script src="js/radar-background.js" type="module"></script>
-    <script src="js/aircraft-viewer.js" type="module"></script>
-    <script src="js/aviation-commands.js" type="module"></script>
-    <script src="js/main.js" type="module"></script>
+    <!-- 3D Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    
+    <!-- Map Libraries -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    
+    <!-- Chart Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Flight Data Library -->
+    <script src="https://cdn.jsdelivr.net/npm/flightradarapi-client@latest/dist/fr24.min.js"></script>
+    
+    <!-- Main Script -->
+    <script src="aviation.js" type="module"></script>
 </body>
 </html>
