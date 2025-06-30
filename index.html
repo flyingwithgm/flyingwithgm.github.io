@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GM73 | The Flying Engineer</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Preload critical assets -->
-    <link rel="preload" href="js/webgl-background.js" as="script">
-    <link rel="preload" href="js/avatar-component.js" as="script">
+    <meta name="description" content="George Nuyekpe - Ghanaian Aviation-Tech Visionary combining computer science and pilot training to revolutionize flight systems">
+    <meta property="og:title" content="GM73 | The Flying Engineer">
+    <meta property="og:description" content="Bridging the gap between computer science and aviation to create safer, smarter flight systems">
+    <meta property="og:image" content="https://gm73.com/images/social-preview.jpg">
+    <meta name="theme-color" content="#0a192f">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
-    <!-- WebGL Background Canvas -->
-    <canvas id="webgl-background" class="webgl-background"></canvas>
+    <!-- 3D Background Element -->
+    <div id="threejs-bg"></div>
     
-    <!-- Voice Command Interface -->
-    <div class="voice-interface">
-        <button id="voice-command-btn" aria-label="Voice commands">
-            <i class="fas fa-microphone"></i>
-            <span class="pulse-ring"></span>
-        </button>
-        <div class="voice-feedback" id="voice-feedback"></div>
+    <!-- AR Experience Trigger -->
+    <div class="ar-trigger" id="arTrigger">
+        <i class="fas fa-rocket"></i>
+        <span>View in AR</span>
     </div>
 
     <header>
@@ -29,177 +29,270 @@
             <div class="logo-container">
                 <img src="images/gm73-logo.png" alt="GM73 Logo" class="logo">
                 <span class="brand-name">GM73</span>
+                <span class="brand-subtitle">The Flying Engineer</span>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="aviation.html">Aviation</a></li>
-                <li><a href="ai.html">AI</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> <span>Home</span></a></li>
+                <li><a href="aviation.html"><i class="fas fa-plane"></i> <span>Aviation</span></a></li>
+                <li><a href="ai.html"><i class="fas fa-robot"></i> <span>AI</span></a></li>
+                <li><a href="projects.html"><i class="fas fa-code-branch"></i> <span>Projects</span></a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
             </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
+            <div class="nav-extras">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
             </div>
         </nav>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <h1 class="typewriter" data-text="GM73 | The Flying Engineer"></h1>
-            <h2>George Nuyekpe | Ghana's Aviation-Tech Visionary</h2>
-            <p>Bridging the gap between computer science and aviation to create safer, smarter flight systems</p>
-            
-            <!-- Interactive Terminal -->
-            <div class="interactive-terminal">
-                <div class="terminal-header">
-                    <span class="terminal-dot red"></span>
-                    <span class="terminal-dot yellow"></span>
-                    <span class="terminal-dot green"></span>
-                    <span class="terminal-title">aviation_systems --profile=gm73</span>
-                </div>
-                <div class="terminal-body" id="terminal-output">
-                    <div>> Initializing systems...</div>
-                    <div>> Loading aviation datasets...</div>
-                    <div>> Connecting to AI models...</div>
-                    <div class="blinking-cursor">_</div>
-                </div>
-            </div>
-            
-            <!-- Real-time Flight Data Widget -->
-            <div class="flight-widget">
-                <div class="flight-header">
-                    <i class="fas fa-plane"></i>
-                    <h4>Live Flight Data</h4>
-                    <span class="flight-status" id="flight-status">Syncing...</span>
-                </div>
-                <div class="flight-metrics">
-                    <div class="metric">
-                        <span class="label">Altitude</span>
-                        <span class="value" id="altitude">--</span>
-                    </div>
-                    <div class="metric">
-                        <span class="label">Speed</span>
-                        <span class="value" id="speed">--</span>
-                    </div>
-                    <div class="metric">
-                        <span class="label">Heading</span>
-                        <span class="value" id="heading">--</span>
-                    </div>
-                </div>
+            <h1 class="glow" id="dynamicTitle">THE FLYING ENGINEER</h1>
+            <h2 class="typewriter" id="typewriterSubtitle"></h2>
+            <p class="fade-up">Bridging the gap between computer science and aviation to create safer, smarter flight systems</p>
+            <div class="hero-cta">
+                <a href="#about" class="cta-button pulse">Explore My Journey</a>
+                <a href="#voice-intro" class="cta-button secondary voice-cta">
+                    <i class="fas fa-microphone"></i> Hear My Story
+                </a>
             </div>
         </div>
-        
-        <!-- 3D Avatar -->
-        <div class="avatar-container">
-            <div id="avatar-3d" class="avatar-3d"></div>
-            <div class="avatar-controls">
-                <button class="avatar-action" data-action="wave"><i class="fas fa-hand-paper"></i></button>
-                <button class="avatar-action" data-action="explain"><i class="fas fa-comment-dots"></i></button>
-                <button class="avatar-action" data-action="demo"><i class="fas fa-rocket"></i></button>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+        <div class="hero-particle" id="heroParticles"></div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="profile-container">
+            <div class="profile-img-container">
+                <img src="images/george-profile.jpg" alt="George Nuyekpe" class="profile-img">
+                <div class="profile-hover-info">
+                    <h4>George Nuyekpe</h4>
+                    <p>Aviation-Tech Visionary</p>
+                    <div class="social-hover">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-details">
+                <h2>From Takoradi to The World</h2>
+                <p>Born and raised in rural Ghana, I've always been fascinated by the intersection of technology and aviation. Despite limited resources, I've maintained an unwavering focus on my goals of becoming both an ATPL-certified pilot and a computer scientist specializing in AI for aviation systems.</p>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="counter" data-target="19">0</span>
+                        <span>Years Old</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="counter" data-target="8">0</span>
+                        <span>A1 Grades</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="counter" data-target="2">0</span>
+                        <span>Career Paths</span>
+                    </div>
+                    <div class="stat-box">
+                        <span>∞</span>
+                        <span>Ambition</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- [Previous sections remain unchanged until skills section] -->
+    <section id="voice-intro" class="voice-section">
+        <div class="voice-container">
+            <div class="voice-player">
+                <div class="voice-waveform" id="voiceWaveform"></div>
+                <div class="voice-controls">
+                    <button class="voice-play" id="voicePlay">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <div class="voice-timeline">
+                        <div class="voice-progress" id="voiceProgress"></div>
+                    </div>
+                    <div class="voice-time">
+                        <span id="currentTime">0:00</span> / <span id="totalTime">1:30</span>
+                    </div>
+                </div>
+            </div>
+            <div class="voice-transcript">
+                <h3>My Story in My Voice</h3>
+                <p>Hello, I'm George Nuyekpe. Growing up in Ghana, I always looked up at the planes flying overhead and dreamed of being in the cockpit. At the same time, I was fascinated by how technology works. This website represents my journey to combine these two passions...</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline-section">
+        <h2>My Flight Path</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2018 - BECE Excellence</h3>
+                    <p>Graduated Junior High with Grade 1 in all 9 subjects, demonstrating early academic excellence.</p>
+                    <button class="timeline-more" data-modal="timeline-modal-1">View Details</button>
+                </div>
+            </div>
+            <!-- Other timeline items with similar structure -->
+            <div class="timeline-item future">
+                <div class="timeline-content">
+                    <h3>2035 - Aviation-Tech Leader</h3>
+                    <p>Developing intelligent aviation systems as both a certified pilot and computer scientist.</p>
+                    <button class="timeline-more" data-modal="timeline-modal-7">View Projections</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="skills-section">
         <h2>Dual-Engine Skillset</h2>
-        
-        <!-- AI-Powered Skill Assessment -->
-        <div class="skill-assessment">
-            <div class="assessment-header">
-                <h3>AI-Evaluated Competencies</h3>
-                <button id="run-assessment" class="ai-button">
-                    <i class="fas fa-robot"></i> Run AI Assessment
-                </button>
-            </div>
+        <div class="skills-container">
             <div class="skill-category">
-                <h3><i class="fas fa-brain"></i> Cognitive Abilities</h3>
+                <h3><i class="fas fa-plane"></i> Aviation</h3>
                 <div class="skill">
-                    <span>Systems Thinking</span>
+                    <span>Flight Theory <span class="skill-percent">65%</span></span>
                     <div class="progress-bar">
-                        <div class="progress ai-assessed" data-skill="systems-thinking" style="width: 0%"></div>
-                        <span class="ai-score">AI evaluating...</span>
+                        <div class="progress" style="width: 65%"></div>
                     </div>
                 </div>
-                <!-- [Additional skills...] -->
+                <!-- Other skills -->
             </div>
+            <!-- Other skill categories -->
         </div>
-        
-        <!-- [Rest of existing skills sections...] -->
+        <div class="skills-visualization">
+            <canvas id="skillsRadarChart"></canvas>
+        </div>
     </section>
 
     <section class="projects-preview">
-        <h2>Innovation Portfolio</h2>
-        
-        <!-- AI Project Recommender -->
-        <div class="ai-recommender">
-            <h3>AI-Curated Projects Based on Your Interests</h3>
-            <div class="interest-selector">
-                <span class="interest-pill selected" data-interest="aviation">Aviation</span>
-                <span class="interest-pill" data-interest="ai">AI</span>
+        <h2>Current Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image" style="background-image: url('images/project-flight-sim.png');">
+                    <div class="project-status">Coming Soon</div>
+                    <div class="project-hover">
+                        <h3>FlightSim Planner</h3>
+                        <p>Interactive aviation systems simulator</p>
+                        <button class="project-preview" data-project="1">Quick Preview</button>
+                    </div>
+                </div>
+                <!-- Other project cards -->
             </div>
-            <button id="generate-recommendations" class="ai-button">
-                <i class="fas fa-magic"></i> Generate Recommendations
-            </button>
         </div>
-        
-        <!-- 3D Project Gallery -->
-        <div class="projects-gallery" id="projects-3d-gallery">
-            <!-- Project cards will be generated here by JavaScript -->
-        </div>
-        
-        <!-- [Rest of projects section...] -->
+        <a href="projects.html" class="cta-button secondary with-icon">
+            View All Projects <i class="fas fa-arrow-right"></i>
+        </a>
     </section>
 
-    <footer class="smart-footer">
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2>Ready for Takeoff?</h2>
+            <p>Join me on this journey to revolutionize aviation through technology</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="cta-button pulse">Get In Touch</a>
+                <a href="aviation.html" class="cta-button secondary with-icon">
+                    Explore Aviation <i class="fas fa-plane"></i>
+                </a>
+            </div>
+        </div>
+        <div class="cta-particle" id="ctaParticles"></div>
+    </section>
+
+    <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <div class="logo-container">
-                    <img src="images/gm73-logo.png" alt="GM73 Logo" class="footer-logo">
-                    <div class="logo-animation"></div>
-                </div>
+                <img src="images/gm73-logo.png" alt="GM73 Logo" class="footer-logo">
                 <h3>GM73 | The Flying Engineer</h3>
-                <p>Pushing the Boundaries of Aviation Technology</p>
-                
-                <!-- Social Links with Live Metrics -->
-                <div class="social-metrics">
-                    <a href="https://github.com/flyingwithgm" class="social-link" target="_blank">
-                        <i class="fab fa-github"></i>
-                        <span class="metric-badge" id="github-stars">1.2k</span>
-                    </a>
-                    <a href="https://linkedin.com/in/yourprofile" class="social-link" target="_blank">
-                        <i class="fab fa-linkedin"></i>
-                        <span class="metric-badge" id="linkedin-connections">500+</span>
-                    </a>
+                <p>Bridging Aviation & Technology</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-            
             <div class="footer-links">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="aviation.html">Aviation</a></li>
-                    <li><a href="ai.html">AI</a></li>
-                </ul>
-                <ul>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="https://github.com/flyingwithgm" target="_blank">GitHub</a></li>
-                </ul>
+                <div class="footer-column">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="aviation.html">Aviation</a></li>
+                        <li><a href="ai.html">AI</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Learning Materials</a></li>
+                        <li><a href="#">Aviation Tools</a></li>
+                        <li><a href="#">Tech Stack</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2023 George Nuyekpe. All rights reserved.</p>
             <p>From Ghana to the World</p>
+            <div class="footer-tech">
+                <span>Built with:</span>
+                <i class="fab fa-html5" title="HTML5"></i>
+                <i class="fab fa-css3-alt" title="CSS3"></i>
+                <i class="fab fa-js" title="JavaScript"></i>
+                <i class="fas fa-cube" title="Three.js"></i>
+            </div>
         </div>
     </footer>
 
-    <!-- JavaScript Files -->
-    <script src="js/webgl-background.js" type="module"></script>
-    <script src="js/avatar-component.js" type="module"></script>
-    <script src="js/voice-commands.js" type="module"></script>
-    <script src="js/main.js" type="module"></script>
+    <!-- Modals -->
+    <div class="modal" id="timeline-modal-1">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h3>2018 - BECE Excellence</h3>
+            <p>Detailed information about this achievement...</p>
+            <div class="modal-gallery">
+                <img src="images/achievement-1.jpg" alt="BECE Achievement">
+            </div>
+        </div>
+    </div>
+
+    <!-- Other modals -->
+
+    <div class="project-preview-modal" id="projectPreview">
+        <div class="preview-content">
+            <button class="preview-close">&times;</button>
+            <div class="preview-iframe-container">
+                <iframe id="projectIframe" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Web Components -->
+    <script type="module" src="components/dynamic-title.js"></script>
+    <script type="module" src="components/ar-trigger.js"></script>
+
+    <!-- Main Script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="script.js" type="module"></script>
 </body>
 </html>
