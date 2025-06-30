@@ -4,138 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | GM73</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Preload contact assets -->
+    <link rel="preload" href="js/contact-map.js" as="script">
+    <link rel="preload" href="js/smart-form.js" as="script">
 </head>
 <body>
+    <!-- Minimal WebGL Background -->
+    <canvas id="contact-background" class="webgl-contact"></canvas>
+    
+    <!-- AR Meeting Button -->
+    <button id="ar-meeting-btn" class="ar-button">
+        <i class="fas fa-vr-cardboard"></i> AR Meeting
+    </button>
+
     <header>
-        <nav>
-            <div class="logo-container">
-                <img src="images/gm73-logo.png" alt="GM73 Logo" class="logo">
-                <span class="brand-name">GM73</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="aviation.html">Aviation</a></li>
-                <li><a href="ai.html">AI</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
+        <!-- Consistent navigation -->
     </header>
 
     <section class="page-hero contact-hero">
         <div class="hero-content">
-            <h1>CONTACT</h1>
-            <h2>Let's Connect</h2>
-            <p>Opportunities, collaborations, or just to say hello</p>
+            <h1 class="typewriter" data-text="CONNECT WITH GM73"></h1>
+            <h2>Let's Build The Future Together</h2>
+            
+            <!-- 3D Location Map -->
+            <div class="location-map-3d">
+                <div id="map-visualization"></div>
+                <div class="map-coordinates">
+                    <span><i class="fas fa-map-marker-alt"></i> 5°N, 2°W</span>
+                    <span>Takoradi, Ghana</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="contact-section">
         <div class="contact-container">
-            <div class="contact-form">
-                <h2>Send Me a Message</h2>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="cta-button">Send Message</button>
-                </form>
-                <div id="formSuccess" class="form-success">
-                    <p>Message sent successfully! I'll get back to you soon.</p>
-                </div>
-            </div>
-            <div class="contact-info">
-                <h2>Direct Contacts</h2>
-                <div class="info-card">
-                    <div class="info-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="info-content">
-                        <h3>Email</h3>
-                        <a href="mailto:georgenuyekpe@gmail.com">georgenuyekpe@gmail.com</a>
+            <!-- Smart Contact Form -->
+            <form id="smart-contact-form">
+                <div class="form-group">
+                    <label>Purpose of Contact</label>
+                    <div class="ai-suggestions">
+                        <span class="suggestion active" data-type="collaboration">
+                            <i class="fas fa-handshake"></i> Collaboration
+                        </span>
+                        <span class="suggestion" data-type="question">
+                            <i class="fas fa-question-circle"></i> Technical Question
+                        </span>
+                        <span class="suggestion" data-type="speaking">
+                            <i class="fas fa-microphone"></i> Speaking Engagement
+                        </span>
                     </div>
                 </div>
-                <div class="info-card">
-                    <div class="info-icon">
+                
+                <div class="dynamic-fields">
+                    <div class="form-group">
+                        <label for="contact-name">Full Name</label>
+                        <input type="text" id="contact-name" required>
+                    </div>
+                    
+                    <!-- Fields update based on selection -->
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" rows="5" required></textarea>
+                    <div class="ai-assistance">
+                        <button type="button" id="ai-rewrite">
+                            <i class="fas fa-magic"></i> Improve with AI
+                        </button>
+                        <span class="ai-tip">Tip: Be specific about your aviation-tech interests</span>
+                    </div>
+                </div>
+                
+                <button type="submit" class="cta-button with-ai">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+            
+            <div class="contact-alternatives">
+                <h3>Other Ways to Connect:</h3>
+                <div class="alternative-cards">
+                    <a href="https://github.com/flyingwithgm" class="alt-card" target="_blank">
                         <i class="fab fa-github"></i>
-                    </div>
-                    <div class="info-content">
-                        <h3>GitHub</h3>
-                        <a href="https://github.com/flyingwithgm" target="_blank">github.com/flyingwithgm</a>
-                    </div>
-                </div>
-                <div class="info-card">
-                    <div class="info-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="info-content">
-                        <h3>Location</h3>
-                        <p>Takoradi, Ghana</p>
-                    </div>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/yourprofile" class="alt-card" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button class="alt-card" id="schedule-call">
+                        <i class="fas fa-video"></i>
+                        <span>Video Call</span>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="inspiration-section">
-        <div class="quote-container">
-            <blockquote>
-                "The air up there in the clouds is very pure and fine, bracing and delicious. And why shouldn't it be? — it is the same the angels breathe."
-            </blockquote>
-            <p>- Mark Twain</p>
-            <div class="signature">
-                <p>George Nuyekpe</p>
-                <p>GM73 | The Flying Engineer</p>
-            </div>
+    <section class="contact-success" id="form-success">
+        <div class="success-content">
+            <i class="fas fa-check-circle"></i>
+            <h2>Message Received!</h2>
+            <p>I'll respond within 24-48 hours. For urgent matters:</p>
+            <a href="mailto:georgenuyekpe@gmail.com" class="email-link">
+                georgenuyekpe@gmail.com
+            </a>
+            <button id="send-another" class="outline-button">
+                Send Another Message
+            </button>
         </div>
     </section>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <img src="images/gm73-logo.png" alt="GM73 Logo" class="footer-logo">
-                <h3>GM73 | The Flying Engineer</h3>
-                <p>Bridging Aviation & Technology</p>
-            </div>
-            <div class="footer-links">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="aviation.html">Aviation</a></li>
-                    <li><a href="ai.html">AI</a></li>
-                </ul>
-                <ul>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="https://github.com/flyingwithgm" target="_blank">GitHub</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 George Nuyekpe. All rights reserved.</p>
-            <p>From Ghana to the World</p>
-        </div>
+    <footer class="smart-footer">
+        <!-- Consistent footer -->
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Contact-specific JS -->
+    <script src="js/contact-map.js" type="module"></script>
+    <script src="js/smart-form.js" type="module"></script>
+    <script src="js/ar-features.js" type="module"></script>
+    <script src="js/main.js" type="module"></script>
 </body>
 </html>
