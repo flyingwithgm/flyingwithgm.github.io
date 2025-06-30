@@ -3,145 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI | GM73</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>AI in Aviation | GM73 - The Flying Engineer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Preload AI-specific assets -->
-    <link rel="preload" href="js/circuit-background.js" as="script">
-    <link rel="preload" href="js/nn-visualization.js" as="script">
 </head>
 <body>
-    <!-- Circuit-board WebGL Background -->
-    <canvas id="circuit-background" class="webgl-circuit"></canvas>
+    <!-- Neural Network Background Visualization -->
+    <div id="nn-visualization" class="nn-background"></div>
     
-    <!-- AI Voice Assistant -->
-    <div class="voice-interface ai-assistant">
-        <button id="ai-voice-btn" aria-label="AI Assistant">
-            <i class="fas fa-robot"></i>
-            <span class="pulse-ring ai-pulse"></span>
-        </button>
-        <div class="voice-feedback" id="ai-voice-feedback"></div>
-    </div>
-
     <header>
-        <!-- Consistent navigation -->
         <nav>
             <div class="logo-container">
                 <img src="images/gm73-logo.png" alt="GM73 Logo" class="logo">
                 <span class="brand-name">GM73</span>
+                <span class="brand-subtitle">The Flying Engineer</span>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="aviation.html">Aviation</a></li>
-                <li><a href="ai.html" class="active">AI</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.html"><i class="fas fa-home"></i> <span>Home</span></a></li>
+                <li><a href="aviation.html"><i class="fas fa-plane"></i> <span>Aviation</span></a></li>
+                <li><a href="ai.html" class="active"><i class="fas fa-robot"></i> <span>AI</span></a></li>
+                <li><a href="projects.html"><i class="fas fa-code-branch"></i> <span>Projects</span></a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
             </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
+            <div class="nav-extras">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
             </div>
         </nav>
     </header>
 
     <section class="page-hero ai-hero">
         <div class="hero-content">
-            <h1 class="typewriter" data-text="AI IN AVIATION"></h1>
-            <h2>The Co-Pilot of the Future</h2>
+            <h1 class="glow">ARTIFICIAL INTELLIGENCE</h1>
+            <h2 class="typewriter">The Co-Pilot of the Future</h2>
+            <p>How machine learning and AI are transforming aviation</p>
+            <div class="hero-cta">
+                <a href="#nn-playground" class="cta-button pulse">
+                    <i class="fas fa-brain"></i> Neural Network Playground
+                </a>
+            </div>
+        </div>
+        <div class="ai-particle" id="aiParticles"></div>
+    </section>
+
+    <section class="ai-intro">
+        <div class="section-content">
+            <h2>What is Artificial Intelligence?</h2>
+            <p>Artificial Intelligence (AI) refers to computer systems that can perform tasks typically requiring human intelligence - learning, reasoning, problem-solving, and decision-making. In simple terms, AI allows machines to learn from experience and perform human-like tasks.</p>
             
-            <!-- AI Chat Interface -->
-            <div class="ai-chat-widget">
-                <div class="ai-message">Ask me about AI applications in aviation...</div>
-                <button id="ask-ai"><i class="fas fa-comment-alt"></i> Ask AI</button>
+            <div class="ai-types">
+                <h3>Key AI Fields Simplified:</h3>
+                <div class="ai-types-grid">
+                    <div class="ai-type-card" data-type="ml">
+                        <div class="ai-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h4>Machine Learning</h4>
+                        <p>Systems that learn patterns from data without explicit programming</p>
+                        <button class="ai-type-more">Show Example</button>
+                    </div>
+                    <!-- Other AI type cards -->
+                </div>
+            </div>
+            
+            <div class="ai-demo-container" id="aiDemo">
+                <div class="demo-header">
+                    <h3 id="demoTitle">AI Demonstration</h3>
+                    <div class="demo-controls">
+                        <button id="resetDemo"><i class="fas fa-redo"></i></button>
+                        <button id="fullscreenDemo"><i class="fas fa-expand"></i></button>
+                    </div>
+                </div>
+                <div class="demo-content" id="demoContent">
+                    <p>Select an AI type to see an interactive demonstration</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="ai-demo-section">
-        <!-- Interactive Neural Network -->
-        <div class="nn-visualization-container">
-            <canvas id="nn-canvas"></canvas>
+    <section id="nn-playground" class="nn-playground-section">
+        <h2>Neural Network Playground</h2>
+        <div class="playground-container">
             <div class="nn-controls">
-                <div class="slider-container">
-                    <label>Network Depth</label>
-                    <input type="range" id="nn-depth" min="1" max="5" value="3">
+                <div class="control-group">
+                    <label>Network Architecture</label>
+                    <select id="nnArchitecture">
+                        <option value="simple">Simple Classifier</option>
+                        <option value="convolutional">Convolutional NN</option>
+                        <option value="recurrent">Recurrent NN</option>
+                        <option value="transformer">Transformer</option>
+                    </select>
                 </div>
-                <div class="button-group">
-                    <button id="train-btn" class="ai-button">
-                        <i class="fas fa-brain"></i> Train Model
-                    </button>
-                    <button id="reset-btn">
-                        <i class="fas fa-redo"></i> Reset
-                    </button>
+                <div class="control-group">
+                    <label>Layers</label>
+                    <input type="range" id="nnLayers" min="1" max="10" value="3">
+                    <span id="layersValue">3</span>
+                </div>
+                <div class="control-group">
+                    <label>Neurons per Layer</label>
+                    <input type="range" id="nnNeurons" min="1" max="20" value="8">
+                    <span id="neuronsValue">8</span>
+                </div>
+                <div class="control-group">
+                    <label>Learning Rate</label>
+                    <input type="range" id="nnLearningRate" min="0.001" max="0.1" step="0.001" value="0.01">
+                    <span id="lrValue">0.01</span>
+                </div>
+                <button id="trainNetwork" class="cta-button small">
+                    <i class="fas fa-play"></i> Train Network
+                </button>
+            </div>
+            <div class="nn-visualization">
+                <div class="nn-graph" id="nnGraph"></div>
+                <div class="nn-training">
+                    <div class="training-progress">
+                        <div class="progress-bar">
+                            <div class="progress" id="trainingProgress" style="width: 0%"></div>
+                        </div>
+                        <span id="progressText">0%</span>
+                    </div>
+                    <div class="training-metrics">
+                        <div class="metric">
+                            <span class="metric-label">Loss</span>
+                            <span class="metric-value" id="lossValue">0.000</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Accuracy</span>
+                            <span class="metric-value" id="accuracyValue">0.00%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">Epoch</span>
+                            <span class="metric-value" id="epochValue">0</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="ai-applications">
-            <h2>Current AI Applications in Aviation</h2>
-            <div class="applications-grid">
-                <div class="application-card" data-category="safety">
-                    <div class="app-icon">
-                        <i class="fas fa-shield-alt"></i>
-                        <div class="pulse-animation"></div>
-                    </div>
-                    <h3>Predictive Safety</h3>
-                    <p>Machine learning models analyzing flight data to predict potential system failures</p>
-                    <div class="tech-tags">
-                        <span>TensorFlow</span>
-                        <span>LSTM</span>
-                    </div>
+            <div class="nn-output">
+                <h3>Aviation Application</h3>
+                <div class="application-description" id="nnApplication">
+                    <p>This neural network architecture could be applied to <span class="highlight">flight path optimization</span> by analyzing weather patterns, air traffic, and aircraft performance characteristics to recommend the most efficient routes.</p>
                 </div>
-                
-                <!-- Additional application cards... -->
+                <div class="output-visualization" id="nnOutputVis">
+                    <canvas id="nnOutputCanvas"></canvas>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="future-ai">
-        <h2>Future AI Integration</h2>
-        <div class="timeline-3d">
-            <div class="timeline-track">
-                <div class="timeline-node" data-year="2025">
-                    <div class="node-content">
-                        <h3>AI Co-Pilots</h3>
-                        <p>Assisting human pilots with real-time decision support</p>
+    <section class="ai-aviation-section">
+        <h2>AI in Aviation Today</h2>
+        <div class="case-studies">
+            <div class="case-study active" data-case="autopilot">
+                <div class="case-header">
+                    <h3>Autopilot Systems</h3>
+                    <div class="case-nav">
+                        <button class="case-prev"><i class="fas fa-chevron-left"></i></button>
+                        <button class="case-next"><i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
-                <!-- Additional timeline nodes... -->
+                <div class="case-content">
+                    <div class="case-text">
+                        <p>Modern autopilots use AI to handle complex flight scenarios, adjusting to weather, traffic, and system status in real-time.</p>
+                        <ul>
+                            <li>Adaptive control algorithms</li>
+                            <li>Real-time decision making</li>
+                            <li>Fail-safe redundancies</li>
+                        </ul>
+                        <button class="case-simulate" data-simulation="autopilot">
+                            <i class="fas fa-play-circle"></i> Run Simulation
+                        </button>
+                    </div>
+                    <div class="case-visual">
+                        <div class="autopilot-visual" id="autopilotVisual"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Other case studies -->
+        </div>
+    </section>
+
+    <section class="future-ai-section">
+        <h2>The Future of AI in Aviation</h2>
+        <div class="future-timeline">
+            <div class="timeline-container" id="futureTimeline">
+                <div class="timeline-item" data-year="2025">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>2025-2030</h3>
+                        <ul>
+                            <li>Enhanced vision systems for low-visibility operations</li>
+                            <li>AI co-pilots assisting human pilots</li>
+                            <li>Automated flight planning optimization</li>
+                        </ul>
+                        <div class="timeline-visual">
+                            <img src="images/ai-copilot.jpg" alt="AI Co-pilot Concept">
+                        </div>
+                    </div>
+                </div>
+                <!-- Other timeline items -->
+            </div>
+        </div>
+        <div class="future-simulator">
+            <h3>Experience the Future</h3>
+            <div class="simulator-container" id="futureSimulator">
+                <div class="simulator-controls">
+                    <div class="control-group">
+                        <label>Scenario</label>
+                        <select id="simScenario">
+                            <option value="single-pilot">Single-Pilot Operations</option>
+                            <option value="urban-mobility">Urban Air Mobility</option>
+                            <option value="cargo-ai">Autonomous Cargo</option>
+                        </select>
+                    </div>
+                    <button id="runSimulation" class="cta-button small">
+                        <i class="fas fa-play"></i> Start Simulation
+                    </button>
+                </div>
+                <div class="simulator-visual">
+                    <div class="simulator-view" id="simulatorView"></div>
+                    <div class="simulator-data">
+                        <div class="data-panel">
+                            <h4>System Status</h4>
+                            <div class="data-grid" id="systemStatus"></div>
+                        </div>
+                        <div class="data-panel">
+                            <h4>AI Decisions</h4>
+                            <div class="decision-log" id="decisionLog"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="smart-footer">
+    <section class="personal-vision-section">
+        <h2>My AI + Aviation Vision</h2>
+        <div class="vision-container">
+            <div class="vision-roadmap">
+                <div class="roadmap-item" data-year="2025">
+                    <div class="roadmap-marker"></div>
+                    <div class="roadmap-content">
+                        <h3>2025: Intelligent Flight Training</h3>
+                        <p>Developing AI-powered simulators that adapt to student pilot needs, identifying weaknesses and customizing training scenarios.</p>
+                        <div class="roadmap-visual">
+                            <canvas id="roadmap2025"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- Other roadmap items -->
+            </div>
+            <div class="vision-challenges">
+                <h3>Technical Challenges</h3>
+                <div class="challenges-list">
+                    <div class="challenge-item">
+                        <h4>Real-time Processing</h4>
+                        <p>Developing algorithms that can process flight data in real-time with minimal latency.</p>
+                        <div class="challenge-progress">
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 65%"></div>
+                            </div>
+                            <span>65% solved</span>
+                        </div>
+                    </div>
+                    <!-- Other challenge items -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2>See My AI Projects</h2>
+            <p>Explore how I'm applying these concepts in practical ways</p>
+            <a href="projects.html" class="cta-button pulse">
+                <i class="fas fa-code-branch"></i> View AI Projects
+            </a>
+        </div>
+    </section>
+
+    <footer>
         <!-- Consistent footer -->
-        <div class="footer-content">
-            <div class="footer-brand">
-                <img src="images/gm73-logo.png" alt="GM73 Logo" class="footer-logo">
-                <h3>GM73 | The Flying Engineer</h3>
-                <p>Bridging Aviation & Technology</p>
-            </div>
-            <div class="footer-links">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="aviation.html">Aviation</a></li>
-                    <li><a href="ai.html">AI</a></li>
-                </ul>
-                <ul>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="https://github.com/flyingwithgm" target="_blank">GitHub</a></li>
-                </ul>
-            </div>
-        </div>
     </footer>
 
-    <!-- AI-specific JS -->
-    <script src="js/circuit-background.js" type="module"></script>
-    <script src="js/nn-visualization.js" type="module"></script>
-    <script src="js/ai-assistant.js" type="module"></script>
-    <script src="js/main.js" type="module"></script>
+    <!-- AI Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.2/dist/vis-network.min.js"></script>
+    
+    <!-- Simulation Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    
+    <!-- Main AI Script -->
+    <script src="ai.js" type="module"></script>
 </body>
 </html>
