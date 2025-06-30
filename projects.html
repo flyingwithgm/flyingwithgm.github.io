@@ -4,166 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | GM73</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Preload project assets -->
+    <link rel="preload" href="js/project-viewer.js" as="script">
+    <link rel="preload" href="js/live-editor.js" as="script">
 </head>
 <body>
+    <!-- Tech Pattern WebGL Background -->
+    <canvas id="tech-background" class="webgl-tech"></canvas>
+    
+    <!-- Project Voice Controls -->
+    <div class="voice-interface">
+        <button id="project-voice-btn" aria-label="Project commands">
+            <i class="fas fa-code"></i>
+            <span class="pulse-ring"></span>
+        </button>
+        <div class="voice-feedback" id="project-feedback"></div>
+    </div>
+
     <header>
-        <nav>
-            <div class="logo-container">
-                <img src="images/gm73-logo.png" alt="GM73 Logo" class="logo">
-                <span class="brand-name">GM73</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="aviation.html">Aviation</a></li>
-                <li><a href="ai.html">AI</a></li>
-                <li><a href="projects.html" class="active">Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
+        <!-- Consistent navigation -->
     </header>
 
     <section class="page-hero projects-hero">
         <div class="hero-content">
-            <h1>PROJECTS</h1>
+            <h1 class="typewriter" data-text="TECH PROJECTS"></h1>
             <h2>Building The Future</h2>
-            <p>Where my aviation passion meets technical skills</p>
+            
+            <!-- Interactive Code Editor -->
+            <div class="live-editor-window">
+                <div class="editor-toolbar">
+                    <span class="editor-tab active">flight-sim.js</span>
+                    <div class="editor-actions">
+                        <button id="run-code"><i class="fas fa-play"></i> Run</button>
+                        <button id="debug-code"><i class="fas fa-bug"></i> Debug</button>
+                    </div>
+                </div>
+                <pre><code class="language-javascript">class FlightSim {
+  constructor() {
+    this.altitude = 0;
+    this.heading = 180;
+    this.simulateFlight();
+  }
+  
+  simulateFlight() {
+    // AI-powered flight simulation
+    this.aiController = new AICopilot();
+    this.navigation = new GPSNavigation();
+  }
+}</code></pre>
+                <div class="editor-console" id="code-output">
+                    <div class="console-header">Terminal Output</div>
+                    <div class="console-content"></div>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="projects-showcase">
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-image" style="background-image: url('images/project-flight-sim.png');">
-                    <div class="project-status">Coming Soon</div>
-                </div>
+        <!-- 3D Project Gallery -->
+        <div class="project-gallery-3d">
+            <div class="project-viewer">
+                <div id="flightsim-model" class="project-model" 
+                     data-tech="threejs,webgl,javascript"
+                     data-complexity="high"></div>
                 <div class="project-info">
                     <h3>FlightSim Planner</h3>
-                    <p>A web-based aviation systems simulator designed to help student pilots practice procedures and emergency scenarios in a risk-free environment.</p>
-                    <div class="project-details">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>Interactive flight planning tools</li>
-                            <li>Procedural training modules</li>
-                            <li>Emergency scenario simulations</li>
-                            <li>Performance calculations</li>
-                        </ul>
-                        <h4>Technologies:</h4>
-                        <div class="tech-tags">
-                            <span>JavaScript</span>
-                            <span>Three.js</span>
-                            <span>Node.js</span>
-                        </div>
+                    <div class="tech-indicators">
+                        <span class="tech-meter" data-skill="threejs">
+                            <span class="skill-level" style="width: 85%"></span>
+                            Three.js
+                        </span>
+                        <span class="tech-meter" data-skill="javascript">
+                            <span class="skill-level" style="width: 90%"></span>
+                            JavaScript
+                        </span>
+                    </div>
+                    <div class="project-actions">
+                        <button class="view-demo" data-project="flightsim">
+                            <i class="fas fa-eye"></i> Live Demo
+                        </button>
+                        <a href="https://github.com/flyingwithgm/flight-sim" target="_blank" class="view-code">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="project-card">
-                <div class="project-image" style="background-color: #112240;">
-                    <div class="project-status">In Development</div>
-                </div>
-                <div class="project-info">
-                    <h3>AI + Aviation Blog</h3>
-                    <p>An educational resource explaining artificial intelligence concepts through the lens of aviation applications, making technical topics accessible.</p>
-                    <div class="project-details">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>Technical articles on AI in aviation</li>
-                            <li>Interactive demonstrations</li>
-                            <li>Case studies of current implementations</li>
-                            <li>Future trend analysis</li>
-                        </ul>
-                        <h4>Technologies:</h4>
-                        <div class="tech-tags">
-                            <span>React</span>
-                            <span>Markdown</span>
-                            <span>Python</span>
-                        </div>
-                    </div>
-                </div>
+            
+            <!-- Additional projects... -->
+        </div>
+        
+        <!-- Project Filtering -->
+        <div class="project-filters">
+            <div class="filter-group">
+                <label for="tech-filter">Technology:</label>
+                <select id="tech-filter" multiple>
+                    <option value="webgl">WebGL</option>
+                    <option value="ai">AI</option>
+                    <option value="iot">IoT</option>
+                </select>
             </div>
-            <div class="project-card">
-                <div class="project-image" style="background-color: #0c2d48;">
-                    <div class="project-status">Active</div>
-                </div>
-                <div class="project-info">
-                    <h3>GM73 Website</h3>
-                    <p>This personal portfolio website showcasing my journey, skills, and projects at the intersection of aviation and technology.</p>
-                    <div class="project-details">
-                        <h4>Features:</h4>
-                        <ul>
-                            <li>Responsive design</li>
-                            <li>Interactive elements</li>
-                            <li>Multi-page content structure</li>
-                            <li>GitHub hosted</li>
-                        </ul>
-                        <h4>Technologies:</h4>
-                        <div class="tech-tags">
-                            <span>HTML5</span>
-                            <span>CSS3</span>
-                            <span>JavaScript</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <button id="apply-filters" class="ai-button">
+                <i class="fas fa-filter"></i> Filter Projects
+            </button>
         </div>
     </section>
 
-    <section class="project-ideas">
-        <h2>Future Project Ideas</h2>
-        <div class="ideas-grid">
-            <div class="idea-card">
-                <h3>African Airspace Visualizer</h3>
-                <p>An interactive map showing African flight routes, airports, and aviation infrastructure with growth projections.</p>
-            </div>
-            <div class="idea-card">
-                <h3>Pilot Mental Load Monitor</h3>
-                <p>An AI system that assesses pilot cognitive load during flight operations using biometric data.</p>
-            </div>
-            <div class="idea-card">
-                <h3>Aviation Knowledge Base</h3>
-                <p>A searchable database of aviation regulations, procedures, and best practices with AI-powered Q&A.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section">
-        <h2>Have a Project Idea?</h2>
-        <p>I'm always interested in collaborating on aviation-tech projects</p>
-        <a href="contact.html" class="cta-button">Get In Touch</a>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <img src="images/gm73-logo.png" alt="GM73 Logo" class="footer-logo">
-                <h3>GM73 | The Flying Engineer</h3>
-                <p>Bridging Aviation & Technology</p>
-            </div>
-            <div class="footer-links">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="aviation.html">Aviation</a></li>
-                    <li><a href="ai.html">AI</a></li>
-                </ul>
-                <ul>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="https://github.com/flyingwithgm" target="_blank">GitHub</a></li>
+    <section class="project-roadmap">
+        <h2>Development Roadmap</h2>
+        <div class="roadmap-timeline">
+            <div class="roadmap-phase active">
+                <div class="phase-header">
+                    <h3>Q3 2023</h3>
+                    <span class="status-badge">Current</span>
+                </div>
+                <ul class="phase-tasks">
+                    <li class="completed">Flight physics engine</li>
+                    <li class="in-progress">3D cockpit instrumentation</li>
+                    <li>Weather system integration</li>
                 </ul>
             </div>
+            <!-- Additional roadmap phases... -->
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 George Nuyekpe. All rights reserved.</p>
-            <p>From Ghana to the World</p>
-        </div>
+    </section>
+
+    <footer class="smart-footer">
+        <!-- Consistent footer -->
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Project-specific JS -->
+    <script src="js/project-viewer.js" type="module"></script>
+    <script src="js/live-editor.js" type="module"></script>
+    <script src="js/project-commands.js" type="module"></script>
+    <script src="js/main.js" type="module"></script>
 </body>
 </html>
