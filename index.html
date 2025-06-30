@@ -3,248 +3,483 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GM73 | The Flying Engineer</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>GM73 | The Flying Engineer - Next-Gen Aviation Tech</title>
+    <meta name="description" content="Aviation systems engineer merging cutting-edge AI with aerospace technology">
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="fonts/aviation-bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="css/main.css" as="style">
+    <link rel="preload" href="js/main.js" as="script">
+    
+    <!-- 3D WebGL Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- AI-Powered Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
+    
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Theme Color for Mobile -->
+    <meta name="theme-color" content="#112240">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Twitter Card Meta -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GM73 | The Flying Engineer">
+    <meta name="twitter:description" content="Bridging Aviation & AI Technology">
+    <meta name="twitter:image" content="https://yourdomain.com/images/social-card.jpg">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo-container">
-                <img src="images/gm73-logo.png" alt="GM73 Logo" class="logo">
-                <span class="brand-name">GM73</span>
+    <!-- WebGL Background Canvas -->
+    <canvas id="webgl-background" class="webgl-background"></canvas>
+    
+    <!-- Voice Command Interface -->
+    <div class="voice-interface">
+        <button id="voice-command-btn" aria-label="Voice commands">
+            <i class="fas fa-microphone"></i>
+            <span class="pulse-ring"></span>
+        </button>
+        <div class="voice-feedback" id="voice-feedback"></div>
+    </div>
+    
+    <!-- Augmented Reality Trigger -->
+    <button id="ar-toggle" class="ar-toggle">
+        <i class="fas fa-vr-cardboard"></i> AR Mode
+    </button>
+    
+    <!-- Main Content -->
+    <main class="content-wrapper">
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="typewriter" data-text="GM73 | The Flying Engineer"></h1>
+                <p class="subtitle">Bridging <span class="ai-text">AI</span> & <span class="aviation-text">Aviation</span> Technology</p>
+                
+                <!-- Interactive Terminal -->
+                <div class="interactive-terminal">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">aviation_systems --profile=gm73</span>
+                    </div>
+                    <div class="terminal-body" id="terminal-output">
+                        <div>> Initializing systems...</div>
+                        <div>> Loading aviation datasets...</div>
+                        <div>> Connecting to AI models...</div>
+                        <div class="blinking-cursor">_</div>
+                    </div>
+                </div>
+                
+                <!-- Real-time Flight Data Widget -->
+                <div class="flight-widget">
+                    <div class="flight-header">
+                        <i class="fas fa-plane"></i>
+                        <h4>Live Flight Data</h4>
+                        <span class="flight-status" id="flight-status">Syncing...</span>
+                    </div>
+                    <div class="flight-metrics">
+                        <div class="metric">
+                            <span class="label">Altitude</span>
+                            <span class="value" id="altitude">--</span>
+                        </div>
+                        <div class="metric">
+                            <span class="label">Speed</span>
+                            <span class="value" id="speed">--</span>
+                        </div>
+                        <div class="metric">
+                            <span class="label">Heading</span>
+                            <span class="value" id="heading">--</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="aviation.html">Aviation</a></li>
-                <li><a href="ai.html">AI</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
+            
+            <!-- 3D Avatar -->
+            <div class="avatar-container">
+                <div id="avatar-3d" class="avatar-3d"></div>
+                <div class="avatar-controls">
+                    <button class="avatar-action" data-action="wave"><i class="fas fa-hand-paper"></i></button>
+                    <button class="avatar-action" data-action="explain"><i class="fas fa-comment-dots"></i></button>
+                    <button class="avatar-action" data-action="demo"><i class="fas fa-rocket"></i></button>
+                </div>
             </div>
-        </nav>
-    </header>
+        </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="glow">THE FLYING ENGINEER</h1>
-            <h2>George Nuyekpe | Ghana's Aviation-Tech Visionary</h2>
-            <p>Bridging the gap between computer science and aviation to create safer, smarter flight systems</p>
-            <a href="#about" class="cta-button">Explore My Journey</a>
-        </div>
-        <div class="scroll-indicator">
-            <span></span>
-        </div>
-    </section>
+        <section class="skills-section">
+            <h2>Skills Matrix</h2>
+            
+            <!-- AI-Powered Skill Assessment -->
+            <div class="skill-assessment">
+                <div class="assessment-header">
+                    <h3>AI-Evaluated Competencies</h3>
+                    <button id="run-assessment" class="ai-button">
+                        <i class="fas fa-robot"></i> Run AI Assessment
+                    </button>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-brain"></i> Cognitive Abilities</h3>
+                    <div class="skill">
+                        <span>Systems Thinking</span>
+                        <div class="progress-bar">
+                            <div class="progress ai-assessed" data-skill="systems-thinking" style="width: 0%"></div>
+                            <span class="ai-score">AI evaluating...</span>
+                        </div>
+                    </div>
+                    <div class="skill">
+                        <span>Problem Solving</span>
+                        <div class="progress-bar">
+                            <div class="progress ai-assessed" data-skill="problem-solving" style="width: 0%"></div>
+                            <span class="ai-score">AI evaluating...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Interactive Radar Chart -->
+            <div class="skills-radar">
+                <canvas id="skills-radar-chart"></canvas>
+                <div class="radar-controls">
+                    <button data-chart="technical">Technical</button>
+                    <button data-chart="aviation">Aviation</button>
+                    <button data-chart="ai">AI/ML</button>
+                </div>
+            </div>
+        </section>
 
-    <section id="about" class="about-section">
-        <div class="profile-container">
-            <img src="images/george-profile.jpg" alt="George Nuyekpe" class="profile-img">
-            <div class="profile-details">
-                <h2>From Takoradi to The World</h2>
-                <p>Born and raised in rural Ghana, I've always been fascinated by the intersection of technology and aviation. Despite limited resources, I've maintained an unwavering focus on my goals of becoming both an ATPL-certified pilot and a computer scientist specializing in AI for aviation systems.</p>
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <span class="counter" data-target="19">0</span>
-                        <span>Years Old</span>
+        <section class="projects-preview">
+            <h2>Innovation Portfolio</h2>
+            
+            <!-- AI Project Recommender -->
+            <div class="ai-recommender">
+                <h3>AI-Curated Projects Based on Your Interests</h3>
+                <div class="interest-selector">
+                    <span class="interest-pill selected" data-interest="aviation">Aviation</span>
+                    <span class="interest-pill" data-interest="ai">AI</span>
+                    <span class="interest-pill" data-interest="simulation">Simulation</span>
+                    <span class="interest-pill" data-interest="systems">Systems</span>
+                </div>
+                <button id="generate-recommendations" class="ai-button">
+                    <i class="fas fa-magic"></i> Generate Recommendations
+                </button>
+            </div>
+            
+            <!-- 3D Project Gallery -->
+            <div class="projects-gallery" id="projects-3d-gallery">
+                <!-- Project cards will be generated here by JavaScript -->
+            </div>
+            
+            <!-- Project Filtering -->
+            <div class="project-filters">
+                <div class="filter-group">
+                    <label for="tech-filter">Technology:</label>
+                    <select id="tech-filter" multiple>
+                        <option value="ai">AI/ML</option>
+                        <option value="webgl">WebGL</option>
+                        <option value="iot">IoT</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="status-filter">Status:</label>
+                    <select id="status-filter">
+                        <option value="all">All</option>
+                        <option value="active">Active</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Featured Projects with Interactive Previews -->
+            <div class="projects-grid">
+                <div class="project-card interactive">
+                    <div class="project-image" style="background-image: url('images/project-flight-sim.png');">
+                        <button class="project-preview-btn" data-project="flightsim">
+                            <i class="fas fa-play"></i> Live Demo
+                        </button>
                     </div>
-                    <div class="stat-box">
-                        <span class="counter" data-target="8">0</span>
-                        <span>A1 Grades</span>
+                    <div class="project-info">
+                        <h3>FlightSim Planner</h3>
+                        <p>Next-gen aviation systems simulator with AI co-pilot integration</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">WebGL</span>
+                            <span class="tech-tag">TensorFlow.js</span>
+                            <span class="tech-tag">Three.js</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="#" class="project-link" data-action="details">Details</a>
+                            <a href="#" class="project-link" data-action="code">View Code</a>
+                            <a href="#" class="project-link" data-action="demo">Interactive Demo</a>
+                        </div>
                     </div>
-                    <div class="stat-box">
-                        <span class="counter" data-target="2">0</span>
-                        <span>Career Paths</span>
+                    <div class="project-stats">
+                        <div class="stat">
+                            <i class="fas fa-code-branch"></i>
+                            <span class="stat-value" id="commit-count">1,284</span>
+                            <span class="stat-label">Commits</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-users"></i>
+                            <span class="stat-value" id="contributors">12</span>
+                            <span class="stat-label">Contributors</span>
+                        </div>
                     </div>
-                    <div class="stat-box">
-                        <span>∞</span>
-                        <span>Ambition</span>
+                </div>
+                
+                <!-- AI Blog Project with Real-time Updates -->
+                <div class="project-card dynamic">
+                    <div class="project-image" style="background-color: #112240;">
+                        <div class="live-update-indicator">
+                            <span class="pulse-dot"></span>
+                            <span>AI Generating Content</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>AI + Aviation Blog</h3>
+                        <p id="dynamic-blog-description">Exploring AI applications in modern aviation systems</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">GPT-4</span>
+                            <span class="tech-tag">NLP</span>
+                            <span class="tech-tag">Real-time</span>
+                        </div>
+                        <div class="project-metrics">
+                            <div class="metric">
+                                <span class="label">Articles Generated</span>
+                                <span class="value counter" data-target="47">0</span>
+                            </div>
+                            <div class="metric">
+                                <span class="label">Reader Engagement</span>
+                                <span class="value">92%</span>
+                            </div>
+                        </div>
+                        <div class="project-actions">
+                            <a href="#" class="project-link" data-action="read-latest">Read Latest</a>
+                            <a href="#" class="project-link" data-action="request-topic">Request Topic</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+            
+            <!-- Project Visualization Toggle -->
+            <div class="visualization-toggle">
+                <button data-view="grid" class="active"><i class="fas fa-th"></i> Grid</button>
+                <button data-view="timeline"><i class="fas fa-stream"></i> Timeline</button>
+                <button data-view="network"><i class="fas fa-project-diagram"></i> Network</button>
+                <button data-view="3d"><i class="fas fa-cube"></i> 3D</button>
+            </div>
+        </section>
 
-    <section class="timeline-section">
-        <h2>My Flight Path</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>2018 - BECE Excellence</h3>
-                    <p>Graduated Junior High with Grade 1 in all 9 subjects, demonstrating early academic excellence.</p>
+        <section class="cta-section">
+            <h2>Ready for Takeoff?</h2>
+            <p>Let's collaborate on the future of aviation technology</p>
+            
+            <!-- Interactive Contact Form with AI Assistant -->
+            <div class="smart-contact">
+                <div class="contact-ai-assistant">
+                    <div class="ai-avatar">
+                        <img src="images/ai-avatar.png" alt="AI Assistant">
+                        <div class="ai-status" id="ai-status">Online</div>
+                    </div>
+                    <div class="ai-message" id="ai-message">
+                        Hi! I'm Avi, your AI contact assistant. How can I help connect you with George today?
+                    </div>
+                </div>
+                
+                <form id="smart-contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="contact-purpose">Purpose:</label>
+                        <select id="contact-purpose" required>
+                            <option value="">Select...</option>
+                            <option value="collaboration">Project Collaboration</option>
+                            <option value="consulting">Aviation Consulting</option>
+                            <option value="speaking">Speaking Engagement</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group dynamic-fields">
+                        <!-- Fields will be generated based on purpose selection -->
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="cta-button with-ai">
+                            <i class="fas fa-paper-plane"></i> Send with AI Optimization
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="contact-alternatives">
+                    <h4>Other Ways to Connect:</h4>
+                    <div class="alternative-options">
+                        <button id="schedule-call" class="alt-option">
+                            <i class="fas fa-video"></i> Schedule Video Call
+                        </button>
+                        <button id="join-discord" class="alt-option">
+                            <i class="fab fa-discord"></i> Join Aviation Tech Discord
+                        </button>
+                        <button id="ar-meeting" class="alt-option">
+                            <i class="fas fa-vr-cardboard"></i> AR Meeting Space
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>2021 - WASSCE Achievement</h3>
-                    <p>Earned 6 A1s and 2 B2s at Achimota School, one of Ghana's premier institutions.</p>
+        </section>
+        
+        <!-- Real-time Collaboration Section -->
+        <section class="collaboration-section">
+            <h2>Live Collaboration Hub</h2>
+            <div class="collab-container">
+                <div class="collab-description">
+                    <h3>Join Our Open Innovation Space</h3>
+                    <p>Work with George and other aviation tech enthusiasts in real-time on cutting-edge projects</p>
+                    <ul class="collab-features">
+                        <li><i class="fas fa-code"></i> Shared Code Environment</li>
+                        <li><i class="fas fa-comments"></i> Live Chat & Video</li>
+                        <li><i class="fas fa-sim-card"></i> Flight Sim Integration</li>
+                    </ul>
+                    <button id="join-collab" class="cta-button">
+                        <i class="fas fa-user-astronaut"></i> Enter Collaboration Space
+                    </button>
+                </div>
+                <div class="collab-preview">
+                    <div class="user-avatars">
+                        <!-- Active collaborators will appear here -->
+                    </div>
+                    <div class="active-projects">
+                        <h4>Currently Working On:</h4>
+                        <ul id="active-collab-projects">
+                            <!-- Active projects will appear here -->
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>2023 - UMass Dartmouth</h3>
-                    <p>Accepted to study Computer Science with AI in the US, currently deferring to secure optimal funding.</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>2025 - Self-Education</h3>
-                    <p>Teaching myself aviation theory, programming, and building projects that combine both fields.</p>
-                </div>
-            </div>
-            <div class="timeline-item future">
-                <div class="timeline-content">
-                    <h3>2028 - CS Degree</h3>
-                    <p>Complete Computer Science degree with AI specialization.</p>
-                </div>
-            </div>
-            <div class="timeline-item future">
-                <div class="timeline-content">
-                    <h3>2030 - Flight Training</h3>
-                    <p>Begin professional pilot training to earn ATPL certification.</p>
-                </div>
-            </div>
-            <div class="timeline-item future">
-                <div class="timeline-content">
-                    <h3>2035 - Aviation-Tech Leader</h3>
-                    <p>Developing intelligent aviation systems as both a certified pilot and computer scientist.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <section class="skills-section">
-        <h2>Dual-Engine Skillset</h2>
-        <div class="skills-container">
-            <div class="skill-category">
-                <h3><i class="fas fa-plane"></i> Aviation</h3>
-                <div class="skill">
-                    <span>Flight Theory</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 65%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>Navigation</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 50%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>Meteorology</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 45%"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="skill-category">
-                <h3><i class="fas fa-code"></i> Technology</h3>
-                <div class="skill">
-                    <span>Programming</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 75%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>AI Concepts</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 60%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>Web Development</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 80%"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="skill-category">
-                <h3><i class="fas fa-brain"></i> Personal</h3>
-                <div class="skill">
-                    <span>Discipline</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 95%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>Strategic Thinking</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 85%"></div>
-                    </div>
-                </div>
-                <div class="skill">
-                    <span>Adaptability</span>
-                    <div class="progress-bar">
-                        <div class="progress" style="width: 90%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="projects-preview">
-        <h2>Current Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-image" style="background-image: url('images/project-flight-sim.png');"></div>
-                <div class="project-info">
-                    <h3>FlightSim Planner</h3>
-                    <p>An aviation systems simulator for training and scenario planning (Coming Soon)</p>
-                    <a href="projects.html" class="project-link">Learn More</a>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-image" style="background-color: #112240;"></div>
-                <div class="project-info">
-                    <h3>AI + Aviation Blog</h3>
-                    <p>Exploring the intersection of artificial intelligence and modern aviation (In Development)</p>
-                    <a href="projects.html" class="project-link">Learn More</a>
-                </div>
-            </div>
-        </div>
-        <a href="projects.html" class="cta-button secondary">View All Projects</a>
-    </section>
-
-    <section class="cta-section">
-        <h2>Ready for Takeoff?</h2>
-        <p>Join me on this journey to revolutionize aviation through technology</p>
-        <div class="cta-buttons">
-            <a href="contact.html" class="cta-button">Get In Touch</a>
-            <a href="aviation.html" class="cta-button secondary">Explore Aviation</a>
-        </div>
-    </section>
-
-    <footer>
+    <footer class="smart-footer">
         <div class="footer-content">
             <div class="footer-brand">
-                <img src="images/gm73-logo.png" alt="GM73 Logo" class="footer-logo">
+                <div class="logo-container">
+                    <img src="images/gm73-logo.png" alt="GM73 Logo" class="footer-logo">
+                    <div class="logo-animation"></div>
+                </div>
                 <h3>GM73 | The Flying Engineer</h3>
-                <p>Bridging Aviation & Technology</p>
+                <p>Pushing the Boundaries of Aviation Technology</p>
+                
+                <!-- Social Links with Live Metrics -->
+                <div class="social-metrics">
+                    <a href="https://github.com/flyingwithgm" class="social-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                        <span class="metric-badge" id="github-stars">1.2k</span>
+                    </a>
+                    <a href="https://linkedin.com/in/yourprofile" class="social-link" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                        <span class="metric-badge" id="linkedin-connections">500+</span>
+                    </a>
+                    <a href="https://twitter.com/yourhandle" class="social-link" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                        <span class="metric-badge" id="twitter-followers">3.5k</span>
+                    </a>
+                </div>
             </div>
-            <div class="footer-links">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="aviation.html">Aviation</a></li>
-                    <li><a href="ai.html">AI</a></li>
-                </ul>
-                <ul>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="https://github.com/flyingwithgm" target="_blank">GitHub</a></li>
-                </ul>
+            
+            <div class="footer-navigation">
+                <div class="nav-group">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="index.html" class="nav-link active">Home</a></li>
+                        <li><a href="aviation.html" class="nav-link">Aviation Systems</a></li>
+                        <li><a href="ai.html" class="nav-link">AI Research</a></li>
+                        <li><a href="projects.html" class="nav-link">Innovation Lab</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-group">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="aviation-tools.html" class="nav-link">Aviation Tools</a></li>
+                        <li><a href="ai-models.html" class="nav-link">AI Models</a></li>
+                        <li><a href="research-papers.html" class="nav-link">Research Papers</a></li>
+                        <li><a href="flight-data.html" class="nav-link">Live Flight Data</a></li>
+                    </ul>
+                </div>
+                
+                <div class="nav-group">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="contact.html" class="nav-link">Contact</a></li>
+                        <li><a href="mentorship.html" class="nav-link">Mentorship</a></li>
+                        <li><a href="speaking.html" class="nav-link">Speaking</a></li>
+                        <li><a href="collaborate.html" class="nav-link">Collaborate</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Newsletter with AI Personalization -->
+            <div class="footer-newsletter">
+                <h4>AI-Curated Updates</h4>
+                <p>Get personalized aviation tech updates based on your interests</p>
+                <form id="smart-newsletter">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit">
+                        <i class="fas fa-rocket"></i> Subscribe
+                    </button>
+                </form>
+                <div class="interest-selector">
+                    <span class="interest-option selected" data-interest="ai-aviation">AI in Aviation</span>
+                    <span class="interest-option" data-interest="flight-sims">Flight Sims</span>
+                    <span class="interest-option" data-interest="aerospace">Aerospace Tech</span>
+                </div>
             </div>
         </div>
+        
         <div class="footer-bottom">
-            <p>&copy; 2023 George Nuyekpe. All rights reserved.</p>
-            <p>From Ghana to the World</p>
+            <div class="legal-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+                <a href="cookies.html">Cookie Settings</a>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; <span id="current-year">2023</span> George Nuyekpe. All rights reserved.</p>
+                <p>From Ghana to the World <i class="fas fa-globe-africa"></i></p>
+            </div>
+            
+            <div class="tech-badges">
+                <span class="tech-badge"><i class="fas fa-shield-alt"></i> Secured</span>
+                <span class="tech-badge"><i class="fas fa-bolt"></i> Edge Optimized</span>
+                <span class="tech-badge"><i class="fas fa-leaf"></i> Carbon Neutral</span>
+            </div>
         </div>
     </footer>
-
-    <script src="script.js"></script>
+    
+    <!-- Web Components -->
+    <script type="module" src="js/components/avatar-component.js"></script>
+    <script type="module" src="js/components/project-card.js"></script>
+    
+    <!-- Main Script -->
+    <script src="js/main.js" type="module"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful');
+                }).catch(err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+    
+    <!-- AI Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/ai-analytics@latest/dist/ai-analytics.min.js"></script>
+    <script>
+        AIAnalytics.init({
+            userId: 'unique-gm73-visitor',
+            trackBehavior: true,
+            predictIntent: true
+        });
+    </script>
 </body>
 </html>
