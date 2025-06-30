@@ -3,141 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | GM73</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Projects | GM73 - The Flying Engineer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Preload project assets -->
-    <link rel="preload" href="js/project-viewer.js" as="script">
-    <link rel="preload" href="js/live-editor.js" as="script">
 </head>
 <body>
-    <!-- Tech Pattern WebGL Background -->
-    <canvas id="tech-background" class="webgl-tech"></canvas>
+    <!-- Interactive Project Grid Background -->
+    <div id="project-grid-bg" class="grid-background"></div>
     
-    <!-- Project Voice Controls -->
-    <div class="voice-interface">
-        <button id="project-voice-btn" aria-label="Project commands">
-            <i class="fas fa-code"></i>
-            <span class="pulse-ring"></span>
-        </button>
-        <div class="voice-feedback" id="project-feedback"></div>
-    </div>
-
     <header>
         <!-- Consistent navigation -->
     </header>
 
     <section class="page-hero projects-hero">
         <div class="hero-content">
-            <h1 class="typewriter" data-text="TECH PROJECTS"></h1>
-            <h2>Building The Future</h2>
-            
-            <!-- Interactive Code Editor -->
-            <div class="live-editor-window">
-                <div class="editor-toolbar">
-                    <span class="editor-tab active">flight-sim.js</span>
-                    <div class="editor-actions">
-                        <button id="run-code"><i class="fas fa-play"></i> Run</button>
-                        <button id="debug-code"><i class="fas fa-bug"></i> Debug</button>
+            <h1 class="glow">PROJECTS</h1>
+            <h2 class="typewriter">Building The Future</h2>
+            <p>Where my aviation passion meets technical skills</p>
+            <div class="hero-cta">
+                <a href="#project-filter" class="cta-button pulse">
+                    <i class="fas fa-filter"></i> Filter Projects
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="project-filter" class="project-filter-section">
+        <div class="filter-container">
+            <div class="filter-options">
+                <div class="filter-group">
+                    <label>Category</label>
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="aviation">Aviation</option>
+                        <option value="ai">Artificial Intelligence</option>
+                        <option value="web">Web Development</option>
+                        <option value="research">Research</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Status</label>
+                    <select id="statusFilter">
+                        <option value="all">All Statuses</option>
+                        <option value="completed">Completed</option>
+                        <option value="development">In Development</option>
+                        <option value="planned">Planned</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Technology</label>
+                    <div class="tech-tags-filter">
+                        <button class="tech-tag" data-tech="all">All</button>
+                        <button class="tech-tag" data-tech="python">Python</button>
+                        <button class="tech-tag" data-tech="javascript">JavaScript</button>
+                        <!-- Other tech tags -->
                     </div>
                 </div>
-                <pre><code class="language-javascript">class FlightSim {
-  constructor() {
-    this.altitude = 0;
-    this.heading = 180;
-    this.simulateFlight();
-  }
-  
-  simulateFlight() {
-    // AI-powered flight simulation
-    this.aiController = new AICopilot();
-    this.navigation = new GPSNavigation();
-  }
-}</code></pre>
-                <div class="editor-console" id="code-output">
-                    <div class="console-header">Terminal Output</div>
-                    <div class="console-content"></div>
-                </div>
+                <button id="resetFilters" class="filter-reset">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+            </div>
+            <div class="filter-search">
+                <input type="text" id="projectSearch" placeholder="Search projects...">
+                <button id="searchProjects"><i class="fas fa-search"></i></button>
             </div>
         </div>
     </section>
 
     <section class="projects-showcase">
-        <!-- 3D Project Gallery -->
-        <div class="project-gallery-3d">
-            <div class="project-viewer">
-                <div id="flightsim-model" class="project-model" 
-                     data-tech="threejs,webgl,javascript"
-                     data-complexity="high"></div>
+        <div class="projects-grid" id="projectsContainer">
+            <div class="project-card" data-category="aviation ai" data-status="development" data-tech="python javascript">
+                <div class="project-image" style="background-image: url('images/project-flight-sim.png');">
+                    <div class="project-status">In Development</div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                </div>
                 <div class="project-info">
                     <h3>FlightSim Planner</h3>
-                    <div class="tech-indicators">
-                        <span class="tech-meter" data-skill="threejs">
-                            <span class="skill-level" style="width: 85%"></span>
-                            Three.js
-                        </span>
-                        <span class="tech-meter" data-skill="javascript">
-                            <span class="skill-level" style="width: 90%"></span>
-                            JavaScript
-                        </span>
+                    <p class="project-description">An aviation systems simulator for training and scenario planning</p>
+                    <div class="project-meta">
+                        <span class="meta-item"><i class="fas fa-calendar"></i> Started: Jan 2023</span>
+                        <span class="meta-item"><i class="fas fa-tasks"></i> Progress: 65%</span>
                     </div>
-                    <div class="project-actions">
-                        <button class="view-demo" data-project="flightsim">
-                            <i class="fas fa-eye"></i> Live Demo
-                        </button>
-                        <a href="https://github.com/flyingwithgm/flight-sim" target="_blank" class="view-code">
-                            <i class="fab fa-github"></i> View Code
+                    <div class="project-buttons">
+                        <a href="projects/flightsim.html" class="project-button">
+                            <i class="fas fa-info-circle"></i> Details
                         </a>
+                        <a href="#" class="project-button">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                        <button class="project-button demo-btn" data-demo="flightsim">
+                            <i class="fas fa-play"></i> Demo
+                        </button>
+                    </div>
+                </div>
+                <div class="project-progress">
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 65%"></div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Additional projects... -->
+            <!-- Other project cards -->
         </div>
         
-        <!-- Project Filtering -->
-        <div class="project-filters">
-            <div class="filter-group">
-                <label for="tech-filter">Technology:</label>
-                <select id="tech-filter" multiple>
-                    <option value="webgl">WebGL</option>
-                    <option value="ai">AI</option>
-                    <option value="iot">IoT</option>
-                </select>
-            </div>
-            <button id="apply-filters" class="ai-button">
-                <i class="fas fa-filter"></i> Filter Projects
-            </button>
+        <div class="project-pagination">
+            <button class="pagination-btn" id="prevPage"><i class="fas fa-chevron-left"></i></button>
+            <div class="page-numbers" id="pageNumbers"></div>
+            <button class="pagination-btn" id="nextPage"><i class="fas fa-chevron-right"></i></button>
         </div>
     </section>
 
     <section class="project-roadmap">
-        <h2>Development Roadmap</h2>
-        <div class="roadmap-timeline">
-            <div class="roadmap-phase active">
-                <div class="phase-header">
-                    <h3>Q3 2023</h3>
-                    <span class="status-badge">Current</span>
+        <h2>Project Roadmap</h2>
+        <div class="roadmap-container">
+            <div class="roadmap-timeline">
+                <div class="timeline-bar"></div>
+                <div class="timeline-items">
+                    <div class="timeline-item" data-year="2023">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Q3 2023</h3>
+                            <p>FlightSim Planner MVP</p>
+                            <p>AI Aviation Blog Launch</p>
+                        </div>
+                    </div>
+                    <!-- Other timeline items -->
                 </div>
-                <ul class="phase-tasks">
-                    <li class="completed">Flight physics engine</li>
-                    <li class="in-progress">3D cockpit instrumentation</li>
-                    <li>Weather system integration</li>
-                </ul>
             </div>
-            <!-- Additional roadmap phases... -->
+            <div class="roadmap-visual">
+                <canvas id="roadmapChart"></canvas>
+            </div>
         </div>
     </section>
 
-    <footer class="smart-footer">
+    <section class="project-collaboration">
+        <h2>Collaboration Opportunities</h2>
+        <div class="collab-container">
+            <div class="collab-card">
+                <h3>Open Source Contributions</h3>
+                <p>Looking for contributors to help with these aviation-tech projects</p>
+                <ul class="collab-list">
+                    <li>FlightSim Planner - JavaScript/Python developers</li>
+                    <li>Aviation Data Visualizer - Data scientists</li>
+                    <li>AI Co-pilot Simulator - ML engineers</li>
+                </ul>
+                <a href="contact.html" class="cta-button small">
+                    <i class="fas fa-hands-helping"></i> Get Involved
+                </a>
+            </div>
+            <div class="collab-card">
+                <h3>Research Partnerships</h3>
+                <p>Seeking academic and industry partners for these areas:</p>
+                <ul class="collab-list">
+                    <li>AI in African aviation infrastructure</li>
+                    <li>Low-cost flight training systems</li>
+                    <li>Aviation safety prediction models</li>
+                </ul>
+                <a href="contact.html" class="cta-button small">
+                    <i class="fas fa-university"></i> Partner With Me
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2>Have a Project Idea?</h2>
+            <p>I'm always interested in collaborating on aviation-tech projects</p>
+            <a href="contact.html" class="cta-button pulse">
+                <i class="fas fa-lightbulb"></i> Share Your Idea
+            </a>
+        </div>
+    </section>
+
+    <!-- Project Demo Modal -->
+    <div class="project-demo-modal" id="projectDemoModal">
+        <div class="demo-container">
+            <button class="demo-close">&times;</button>
+            <div class="demo-header">
+                <h3 id="demoProjectTitle">Project Demo</h3>
+                <div class="demo-nav">
+                    <button id="demoFullscreen"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+            <div class="demo-content" id="demoProjectContent">
+                <!-- Dynamic content loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
         <!-- Consistent footer -->
     </footer>
 
-    <!-- Project-specific JS -->
-    <script src="js/project-viewer.js" type="module"></script>
-    <script src="js/live-editor.js" type="module"></script>
-    <script src="js/project-commands.js" type="module"></script>
-    <script src="js/main.js" type="module"></script>
+    <!-- Projects Script -->
+    <script src="projects.js" type="module"></script>
 </body>
 </html>
