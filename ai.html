@@ -4,11 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI | GM73</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Preload AI-specific assets -->
+    <link rel="preload" href="js/circuit-background.js" as="script">
+    <link rel="preload" href="js/nn-visualization.js" as="script">
 </head>
 <body>
+    <!-- Circuit-board WebGL Background -->
+    <canvas id="circuit-background" class="webgl-circuit"></canvas>
+    
+    <!-- AI Voice Assistant -->
+    <div class="voice-interface ai-assistant">
+        <button id="ai-voice-btn" aria-label="AI Assistant">
+            <i class="fas fa-robot"></i>
+            <span class="pulse-ring ai-pulse"></span>
+        </button>
+        <div class="voice-feedback" id="ai-voice-feedback"></div>
+    </div>
+
     <header>
+        <!-- Consistent navigation -->
         <nav>
             <div class="logo-container">
                 <img src="images/gm73-logo.png" alt="GM73 Logo" class="logo">
@@ -31,149 +48,75 @@
 
     <section class="page-hero ai-hero">
         <div class="hero-content">
-            <h1>ARTIFICIAL INTELLIGENCE</h1>
+            <h1 class="typewriter" data-text="AI IN AVIATION"></h1>
             <h2>The Co-Pilot of the Future</h2>
-            <p>How machine learning and AI are transforming aviation</p>
-        </div>
-    </section>
-
-    <section class="ai-intro">
-        <div class="section-content">
-            <h2>What is Artificial Intelligence?</h2>
-            <p>Artificial Intelligence (AI) refers to computer systems that can perform tasks typically requiring human intelligence - learning, reasoning, problem-solving, and decision-making. In simple terms, AI allows machines to learn from experience and perform human-like tasks.</p>
             
-            <div class="ai-types">
-                <h3>Key AI Fields Simplified:</h3>
-                <div class="ai-types-grid">
-                    <div class="ai-type-card">
-                        <h4>Machine Learning</h4>
-                        <p>Systems that learn patterns from data without explicit programming</p>
-                    </div>
-                    <div class="ai-type-card">
-                        <h4>Computer Vision</h4>
-                        <p>Enabling computers to interpret and understand visual information</p>
-                    </div>
-                    <div class="ai-type-card">
-                        <h4>Natural Language Processing</h4>
-                        <p>Allowing computers to understand and generate human language</p>
-                    </div>
-                    <div class="ai-type-card">
-                        <h4>Neural Networks</h4>
-                        <p>AI systems modeled after the human brain's structure</p>
-                    </div>
-                </div>
+            <!-- AI Chat Interface -->
+            <div class="ai-chat-widget">
+                <div class="ai-message">Ask me about AI applications in aviation...</div>
+                <button id="ask-ai"><i class="fas fa-comment-alt"></i> Ask AI</button>
             </div>
         </div>
     </section>
 
-    <section class="ai-aviation-section">
-        <h2>AI in Aviation Today</h2>
-        <div class="ai-aviation-grid">
-            <div class="ai-application">
-                <div class="ai-icon">
-                    <i class="fas fa-robot"></i>
+    <section class="ai-demo-section">
+        <!-- Interactive Neural Network -->
+        <div class="nn-visualization-container">
+            <canvas id="nn-canvas"></canvas>
+            <div class="nn-controls">
+                <div class="slider-container">
+                    <label>Network Depth</label>
+                    <input type="range" id="nn-depth" min="1" max="5" value="3">
                 </div>
-                <h3>Autopilot Systems</h3>
-                <p>Modern autopilots use AI to handle complex flight scenarios, adjusting to weather, traffic, and system status in real-time.</p>
+                <div class="button-group">
+                    <button id="train-btn" class="ai-button">
+                        <i class="fas fa-brain"></i> Train Model
+                    </button>
+                    <button id="reset-btn">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
             </div>
-            <div class="ai-application">
-                <div class="ai-icon">
-                    <i class="fas fa-cloud-sun-rain"></i>
+        </div>
+        
+        <div class="ai-applications">
+            <h2>Current AI Applications in Aviation</h2>
+            <div class="applications-grid">
+                <div class="application-card" data-category="safety">
+                    <div class="app-icon">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="pulse-animation"></div>
+                    </div>
+                    <h3>Predictive Safety</h3>
+                    <p>Machine learning models analyzing flight data to predict potential system failures</p>
+                    <div class="tech-tags">
+                        <span>TensorFlow</span>
+                        <span>LSTM</span>
+                    </div>
                 </div>
-                <h3>Weather Prediction</h3>
-                <p>AI models analyze vast amounts of weather data to predict turbulence, storms, and optimal flight paths.</p>
-            </div>
-            <div class="ai-application">
-                <div class="ai-icon">
-                    <i class="fas fa-traffic-light"></i>
-                </div>
-                <h3>Air Traffic Control</h3>
-                <p>AI assists controllers by predicting traffic conflicts and suggesting optimal routing solutions.</p>
-            </div>
-            <div class="ai-application">
-                <div class="ai-icon">
-                    <i class="fas fa-tools"></i>
-                </div>
-                <h3>Predictive Maintenance</h3>
-                <p>Machine learning analyzes aircraft sensor data to predict mechanical issues before they occur.</p>
+                
+                <!-- Additional application cards... -->
             </div>
         </div>
     </section>
 
-    <section class="future-ai-section">
-        <h2>The Future of AI in Aviation</h2>
-        <div class="future-grid">
-            <div class="future-card">
-                <h3>2025-2030</h3>
-                <ul>
-                    <li>Enhanced vision systems for low-visibility operations</li>
-                    <li>AI co-pilots assisting human pilots</li>
-                    <li>Automated flight planning optimization</li>
-                </ul>
-            </div>
-            <div class="future-card">
-                <h3>2030-2035</h3>
-                <ul>
-                    <li>Single-pilot commercial operations with AI support</li>
-                    <li>Fully autonomous cargo flights</li>
-                    <li>Adaptive flight control systems</li>
-                </ul>
-            </div>
-            <div class="future-card">
-                <h3>2035+</h3>
-                <ul>
-                    <li>AI air traffic management ecosystems</li>
-                    <li>Self-learning aircraft systems</li>
-                    <li>Integrated urban air mobility networks</li>
-                </ul>
+    <section class="future-ai">
+        <h2>Future AI Integration</h2>
+        <div class="timeline-3d">
+            <div class="timeline-track">
+                <div class="timeline-node" data-year="2025">
+                    <div class="node-content">
+                        <h3>AI Co-Pilots</h3>
+                        <p>Assisting human pilots with real-time decision support</p>
+                    </div>
+                </div>
+                <!-- Additional timeline nodes... -->
             </div>
         </div>
     </section>
 
-    <section class="personal-vision-section">
-        <h2>My AI + Aviation Vision</h2>
-        <div class="vision-content">
-            <div class="vision-text">
-                <p>As someone pursuing both computer science (with AI specialization) and professional pilot training, I'm uniquely positioned to develop solutions at the intersection of these fields:</p>
-                
-                <div class="vision-item">
-                    <h3>Intelligent Flight Training Systems</h3>
-                    <p>Developing AI-powered simulators that adapt to student pilot needs, identifying weaknesses and customizing training scenarios.</p>
-                </div>
-                
-                <div class="vision-item">
-                    <h3>African Aviation Optimization</h3>
-                    <p>Creating AI tools tailored to Africa's unique aviation challenges - limited infrastructure, diverse weather patterns, and rapid growth.</p>
-                </div>
-                
-                <div class="vision-item">
-                    <h3>Pilot Decision Support</h3>
-                    <p>Building systems that provide real-time, contextual recommendations to pilots during critical phases of flight.</p>
-                </div>
-                
-                <div class="vision-item">
-                    <h3>Accessible Aviation Tech</h3>
-                    <p>Developing cost-effective AI solutions that make advanced aviation technology accessible to emerging markets.</p>
-                </div>
-            </div>
-            <div class="vision-image">
-                <!-- Placeholder for an infographic -->
-                <div class="infographic-placeholder">
-                    <i class="fas fa-brain"></i>
-                    <i class="fas fa-plane"></i>
-                    <p>AI + Aviation Integration</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section">
-        <h2>See My Projects</h2>
-        <p>Explore how I'm applying these concepts in practical ways</p>
-        <a href="projects.html" class="cta-button">View Projects</a>
-    </section>
-
-    <footer>
+    <footer class="smart-footer">
+        <!-- Consistent footer -->
         <div class="footer-content">
             <div class="footer-brand">
                 <img src="images/gm73-logo.png" alt="GM73 Logo" class="footer-logo">
@@ -193,12 +136,12 @@
                 </ul>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 George Nuyekpe. All rights reserved.</p>
-            <p>From Ghana to the World</p>
-        </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- AI-specific JS -->
+    <script src="js/circuit-background.js" type="module"></script>
+    <script src="js/nn-visualization.js" type="module"></script>
+    <script src="js/ai-assistant.js" type="module"></script>
+    <script src="js/main.js" type="module"></script>
 </body>
 </html>
