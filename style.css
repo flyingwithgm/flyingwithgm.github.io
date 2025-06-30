@@ -1,25 +1,24 @@
-/* ================ BASE STYLES ================ */
+/* ==== Global Variables & Reset ==== */
 :root {
-  /* Aviation Color Palette */
-  --aviation-blue: #0a192f;
-  --cockpit-green: #64ffda;
-  --radar-yellow: #f9d423;
-  --warning-red: #ff5e57;
+  --primary: #0a192f;
+  --secondary: #172a45;
+  --accent: #64ffda;
+  --accent-light: #88ffdb;
   --text-primary: #e6f1ff;
   --text-secondary: #8892b0;
+  --highlight: #1a73e8;
   --card-bg: #112240;
   --timeline-color: #233554;
-
-  /* 3D Effect Variables */
-  --depth-1: 0 1px 3px rgba(0,0,0,0.12);
-  --depth-2: 0 4px 6px rgba(0,0,0,0.16);
-  --depth-3: 0 10px 20px rgba(0,0,0,0.19);
-  
-  /* Animation Curves */
-  --ease-cockpit: cubic-bezier(0.17, 0.67, 0.32, 1.34);
+  --success: #4caf50;
+  --warning: #ff9800;
+  --danger: #f44336;
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+  --transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  --shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+  --nav-height: 80px;
 }
 
-/* Modern Reset */
 * {
   margin: 0;
   padding: 0;
@@ -28,42 +27,21 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 2rem;
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
-  background-color: var(--aviation-blue);
+  font-family: var(--font-body);
+  background-color: var(--primary);
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
   position: relative;
 }
 
-/* ================ TYPOGRAPHY ================ */
-h1, h2, h3, h4 {
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-p {
-  margin-bottom: 1.5rem;
-  color: var(--text-secondary);
-}
-
-a {
-  text-decoration: none;
-  color: var(--cockpit-green);
-  transition: all 0.3s ease;
-}
-
-a:hover {
-  color: var(--text-primary);
-}
-
-/* ================ WEBGL BACKGROUNDS ================ */
-.webgl-background {
+/* ==== 3D Background Elements ==== */
+.nn-background,
+.globe-visualization,
+.grid-background {
   position: fixed;
   top: 0;
   left: 0;
@@ -71,24 +49,31 @@ a:hover {
   height: 100%;
   z-index: -1;
   opacity: 0.15;
-  transition: opacity 0.5s var(--ease-cockpit);
 }
 
-.webgl-radar {
-  background: radial-gradient(circle, transparent 70%, var(--aviation-blue) 100%);
-  animation: radar-scan 8s linear infinite;
+/* ==== Typography ==== */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.1;
 }
 
-.webgl-circuit {
-  background-image: url('images/circuit-pattern.png');
-  background-size: 300px;
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
 }
 
-.webgl-tech {
-  background: linear-gradient(135deg, var(--aviation-blue) 0%, #172a45 100%);
+h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
 }
 
-/* ================ NAVIGATION ================ */
+p {
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+}
+
+/* ==== Navigation ==== */
 header {
   position: fixed;
   top: 0;
@@ -97,81 +82,43 @@ header {
   background-color: rgba(10, 25, 47, 0.9);
   backdrop-filter: blur(10px);
   padding: 1rem 2rem;
+  transition: var(--transition);
 }
 
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .logo-container {
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .logo {
   height: 40px;
-  margin-right: 10px;
+  transition: var(--transition);
 }
 
 .brand-name {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.5rem;
-  color: var(--cockpit-green);
+  color: var(--accent);
 }
 
-.nav-links {
-  display: flex;
-  list-style: none;
+.brand-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 400;
 }
 
-.nav-links li {
-  margin-left: 2rem;
-}
-
-.nav-links a {
-  color: var(--text-primary);
-  font-weight: 500;
-  position: relative;
-}
-
-.nav-links a.active {
-  color: var(--cockpit-green);
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -5px;
-  left: 0;
-  background-color: var(--cockpit-green);
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after,
-.nav-links a.active::after {
-  width: 100%;
-}
-
-.burger {
-  display: none;
-  cursor: pointer;
-}
-
-.burger div {
-  width: 25px;
-  height: 3px;
-  background-color: var(--text-primary);
-  margin: 5px;
-  transition: all 0.3s ease;
-}
-
-/* ================ HERO SECTIONS ================ */
-.hero {
+/* ==== Hero Sections ==== */
+.hero, .page-hero {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -180,244 +127,107 @@ nav {
   text-align: center;
   padding: 0 2rem;
   position: relative;
-}
-
-.page-hero {
-  height: 60vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0 2rem;
-  position: relative;
+  overflow: hidden;
 }
 
 .hero-content {
   max-width: 800px;
   margin: 0 auto;
   z-index: 1;
+  position: relative;
 }
 
-.hero h1 {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  background: linear-gradient(to right, var(--cockpit-green), #88ffdb);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* ================ INTERACTIVE COMPONENTS ================ */
-/* Voice Command Interface */
-.voice-interface {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 1000;
-}
-
-#voice-command-btn {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: var(--cockpit-green);
-  color: var(--aviation-blue);
+/* ==== Interactive Elements ==== */
+.cta-button {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: var(--accent);
+  color: var(--primary);
+  border-radius: 4px;
+  font-weight: 600;
+  transition: var(--transition);
   border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(100, 255, 218, 0.3);
-  transition: all 0.3s var(--ease-cockpit);
-  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
 }
 
-.pulse-ring {
-  position: absolute;
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.cta-button.secondary {
+  background-color: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+/* ==== Animations ==== */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* ==== 3D Model Containers ==== */
+.model-container {
   width: 100%;
-  height: 100%;
-  border: 2px solid var(--cockpit-green);
-  border-radius: 50%;
-  animation: ripple 2s infinite;
-  opacity: 0;
-}
-
-/* Interactive Terminal */
-.interactive-terminal {
-  background: var(--aviation-blue);
+  height: 500px;
+  position: relative;
   border-radius: 8px;
-  padding: 0;
   overflow: hidden;
-  box-shadow: var(--depth-3);
-  margin: 2rem 0;
-  border: 1px solid rgba(100, 255, 218, 0.1);
+  background-color: var(--secondary);
 }
 
-.terminal-header {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  background: rgba(0,0,0,0.2);
-  border-bottom: 1px solid rgba(100, 255, 218, 0.05);
+/* ==== Flight Tracker ==== */
+.tracker-map {
+  height: 500px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--secondary);
 }
 
-.terminal-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  margin-right: 6px;
-}
-
-.terminal-dot.red { background: var(--warning-red); }
-.terminal-dot.yellow { background: var(--radar-yellow); }
-.terminal-dot.green { background: var(--cockpit-green); }
-
-.terminal-body {
-  padding: 1.5rem;
-  font-family: 'Courier New', monospace;
-  color: var(--cockpit-green);
-  height: 200px;
-  overflow-y: auto;
-}
-
-.blinking-cursor {
-  animation: blink 1s step-end infinite;
-}
-
-/* 3D Model Containers */
-.avatar-3d,
-.aircraft-model,
-.project-model {
-  width: 100%;
-  height: 400px;
-  background: rgba(17, 34, 64, 0.7);
-  border-radius: 12px;
-  margin: 2rem 0;
-  transform-style: preserve-3d;
-  transition: transform 0.5s ease;
-}
-
-/* ================ PAGE-SPECIFIC STYLES ================ */
-/* Aviation Page */
-.license-progress-3d {
-  perspective: 1000px;
-  height: 80px;
-  margin: 3rem 0;
-}
-
-.license-track {
-  background: rgba(100, 255, 218, 0.1);
-  height: 4px;
-  position: relative;
-}
-
-.progress-plane {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.5rem;
-  transition: left 1s var(--ease-cockpit);
-}
-
-/* AI Page */
-.nn-visualization-container {
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 2rem;
-  margin: 2rem 0;
-}
-
-/* Projects Page */
-.project-gallery-3d {
+/* ==== Neural Network Playground ==== */
+.nn-playground {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 250px 1fr;
   gap: 2rem;
-  perspective: 1000px;
 }
 
-.live-editor-window {
-  background: var(--card-bg);
-  border-radius: 12px;
-  overflow: hidden;
-  margin: 2rem 0;
-}
-
-/* Contact Page */
-.location-map-3d {
-  height: 300px;
-  position: relative;
-  margin: 2rem 0;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.ar-button {
-  position: fixed;
-  bottom: 2rem;
-  left: 2rem;
-  z-index: 1000;
-  background: var(--radar-yellow);
-  color: var(--aviation-blue);
-  padding: 1rem;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 20px rgba(249, 212, 35, 0.3);
-}
-
-/* ================ ANIMATIONS ================ */
-@keyframes blink {
-  from, to { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@keyframes ripple {
-  to {
-    transform: scale(1.5);
-    opacity: 0;
-  }
-}
-
-@keyframes radar-scan {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* ================ RESPONSIVE DESIGN ================ */
+/* ==== Responsive Design ==== */
 @media (max-width: 768px) {
-  .nav-links {
-    position: absolute;
-    right: 0;
-    top: 80px;
-    background-color: var(--aviation-blue);
-    flex-direction: column;
-    width: 100%;
-    text-align: center;
-    clip-path: circle(0px at 90% -10%);
-    transition: all 0.5s ease-out;
-    pointer-events: none;
-  }
-
-  .nav-links.active {
-    clip-path: circle(1000px at 90% -10%);
-    pointer-events: all;
-  }
-
-  .nav-links li {
-    margin: 1rem 0;
-  }
-
-  .burger {
-    display: block;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
+  .nn-playground {
+    grid-template-columns: 1fr;
   }
   
-  /* Additional mobile styles... */
+  .model-container {
+    height: 300px;
+  }
+}
+
+/* ==== Dark/Light Theme ==== */
+[data-theme="light"] {
+  --primary: #f0f4f8;
+  --secondary: #d9e2ec;
+  --text-primary: #102a43;
+  --text-secondary: #486581;
+  --card-bg: #ffffff;
 }
