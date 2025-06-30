@@ -1,155 +1,169 @@
-// Mobile Navigation
-const burger = document.querySelector('.burger');
-const navLinks = document.querySelector('.nav-links');
-const navLinksItems = document.querySelectorAll('.nav-links li');
+// ===== Main Application Module =====
+import { init3DBackground } from './modules/3d-background.js';
+import { initFlightTracker } from './modules/flight-tracker.js';
+import { initNNPlayground } from './modules/nn-playground.js';
+import { initTypewriter } from './modules/typewriter.js';
+import { initThemeToggle } from './modules/theme-toggle.js';
+import { initContactForm } from './modules/contact-form.js';
 
-burger.addEventListener('click', () => {
-    // Toggle Nav
-    navLinks.classList.toggle('active');
+class GM73App {
+  constructor() {
+    this.initModules();
+    this.registerServiceWorker();
+    this.setupGlobalEvents();
+  }
+
+  initModules() {
+    // Initialize all application modules
+    init3DBackground();
+    initTypewriter();
+    initThemeToggle();
+    initContactForm();
     
-    // Burger Animation
-    burger.classList.toggle('active');
+    // Page-specific modules
+    if (document.querySelector('#flightTrackerMap')) {
+      initFlightTracker();
+    }
     
-    // Animate Links
-    navLinksItems.forEach((link, index) => {
-        if (link.style.animation) {
-            link.style.animation = '';
-        } else {
-            link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-        }
+    if (document.querySelector('#nnPlayground')) {
+      initNNPlayground();
+    }
+  }
+
+  registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful');
+          })
+          .catch(err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+  }
+
+  setupGlobalEvents() {
+    // Mobile navigation toggle
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('.nav-links');
+    
+    burger.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      burger.classList.toggle('active');
     });
-});
 
-// Close mobile menu when clicking on a link
-navLinksItems.forEach(item => {
-    item.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        burger.classList.remove('active');
-        navLinksItems.forEach(link => {
-            link.style.animation = '';
-        });
-    });
-});
-
-// Scroll Animation
-const fadeUpElements = document.querySelectorAll('.fade-up');
-
-const appearOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px"
-};
-
-const appearOnScroll = new IntersectionObserver((entries, appearOnScroll) => {
-    entries.forEach(entry => {
-        if (!entry.isIntersecting) {
-            return;
-        } else {
-            entry.target.classList.add('appear');
-            appearOnScroll.unobserve(entry.target);
-        }
-    });
-}, appearOptions);
-
-fadeUpElements.forEach(element => {
-    appearOnScroll.observe(element);
-});
-
-// Counter Animation
-const counters = document.querySelectorAll('.counter');
-const speed = 200;
-
-function animateCounters() {
-    counters.forEach(counter => {
-        const target = +counter.getAttribute('data-target');
-        const count = +counter.innerText;
-        const increment = target / speed;
-
-        if (count < target) {
-            counter.innerText = Math.ceil(count + increment);
-            setTimeout(animateCounters, 1);
-        } else {
-            counter.innerText = target;
-        }
-    });
-}
-
-// Only animate counters when they come into view
-const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateCounters();
-            counterObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
-
-counters.forEach(counter => {
-    counterObserver.observe(counter);
-});
-
-// Progress Bar Animation
-const progressBars = document.querySelectorAll('.progress');
-
-function animateProgressBars() {
-    progressBars.forEach(progress => {
-        const targetWidth = progress.style.width;
-        progress.style.width = '0';
-        setTimeout(() => {
-            progress.style.width = targetWidth;
-        }, 100);
-    });
-}
-
-const progressObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateProgressBars();
-            progressObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
-
-progressBars.forEach(progress => {
-    progressObserver.observe(progress.parentElement);
-});
-
-// Contact Form Simulation
-const contactForm = document.getElementById('contactForm');
-const formSuccess = document.getElementById('formSuccess');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        
-        // Simulate form submission
-        setTimeout(() => {
-            contactForm.style.display = 'none';
-            formSuccess.style.display = 'block';
-        }, 1000);
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
     });
+
+    // Intersection Observer for animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up, .slide-in').forEach(el => {
+      observer.observe(el);
+    });
+  }
 }
 
-// Smooth Scrolling for Anchor Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// Initialize all fade-up elements
+// Initialize application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    fadeUpElements.forEach(element => {
-        element.classList.add('fade-up');
-    });
+  new GM73App();
 });
+
+// ===== 3D Background Module =====
+export function init3DBackground() {
+  const bgContainer = document.getElementById('threejs-bg');
+  if (!bgContainer) return;
+
+  import('three').then(THREE => {
+    // 3D scene setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    bgContainer.appendChild(renderer.domElement);
+
+    // Add 3D objects
+    const geometry = new THREE.IcosahedronGeometry(1, 0);
+    const material = new THREE.MeshBasicMaterial({ 
+      color: 0x64ffda,
+      wireframe: true 
+    });
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    camera.position.z = 3;
+
+    // Animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+      mesh.rotation.x += 0.005;
+      mesh.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    }
+    
+    animate();
+
+    // Responsive handling
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  });
+}
+
+// ===== Typewriter Effect Module =====
+export function initTypewriter() {
+  const elements = document.querySelectorAll('.typewriter');
+  if (!elements.length) return;
+
+  elements.forEach(el => {
+    const text = el.textContent;
+    el.textContent = '';
+    
+    let i = 0;
+    const typing = setInterval(() => {
+      if (i < text.length) {
+        el.textContent += text.charAt(i);
+        i++;
+      } else {
+        clearInterval(typing);
+      }
+    }, 100);
+  });
+}
+
+// ===== Theme Toggle Module =====
+export function initThemeToggle() {
+  const toggle = document.getElementById('themeToggle');
+  if (!toggle) return;
+
+  toggle.addEventListener('click', () => {
+    document.documentElement.setAttribute(
+      'data-theme',
+      document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
+    );
+    toggle.querySelector('i').classList.toggle('fa-moon');
+    toggle.querySelector('i').classList.toggle('fa-sun');
+  });
+}
