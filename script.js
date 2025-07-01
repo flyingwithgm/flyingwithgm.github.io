@@ -167,3 +167,16 @@ export function initThemeToggle() {
     toggle.querySelector('i').classList.toggle('fa-sun');
   });
 }
+// Import modules
+import { init3DBackground } from './modules/3d-background.js';
+import { initAISimulation } from './modules/simulation.js';
+import { initTypewriter } from './modules/typewriter.js';
+
+// Initialize based on page content
+document.addEventListener('DOMContentLoaded', () => {
+  initTypewriter(); // Always load
+  
+  // Load only if elements exist
+  if (document.getElementById('threejs-bg')) init3DBackground();
+  if (document.getElementById('runSimulation')) initAISimulation();
+});
